@@ -1,17 +1,16 @@
 {
   "Medieval": {
     "years": "500-1400",
-    "description": "Sacred music, Gregorian chant, and the beginnings of Western notation.",
+    "description": "Sacred chant, early notation, and the beginnings of Western polyphony.",
 
     "composers": [
-
       {
         "name": "Hildegard von Bingen",
-        "style": "Sacred Chant",
         "birth": "1098",
+        "style": "Sacred Chant",
+        "mood": "Peaceful",
         "image": "hildegard.jpg",
-        "about": "German abbess and visionary composer known for mystical chants.",
-
+        "about": "German abbess, writer, and composer known for mystical and visionary sacred music.",
         "songs": [
           {
             "title": "O Virtus Sapientiae",
@@ -20,14 +19,13 @@
         ]
       },
 
-
       {
         "name": "Guillaume de Machaut",
-        "style": "Ars Nova",
         "birth": "1300",
+        "style": "Ars Nova Polyphony",
+        "mood": "Dramatic",
         "image": "machaut.jpg",
-        "about": "French composer who expanded rhythmic and harmonic complexity.",
-
+        "about": "French composer who advanced rhythm and harmony during the late Medieval period.",
         "songs": [
           {
             "title": "Messe de Nostre Dame",
@@ -35,170 +33,195 @@
           }
         ]
       }
-
     ]
   },
 
 
   "Renaissance": {
-
     "years": "1400-1600",
+    "description": "The golden age of vocal harmony, balanced polyphony, and sacred choral music.",
 
-    "description":
-    "Balanced vocal polyphony and the golden age of choral writing.",
-
-
-    "composers":[
-
+    "composers": [
 
       {
-        "name":"Josquin des Prez",
-        "style":"Renaissance Polyphony",
-        "birth":"1450",
-        "image":"josquin.jpg",
-
-        "about":
-        "One of the greatest masters of Renaissance counterpoint.",
-
-
-        "songs":[
+        "name": "Josquin des Prez",
+        "birth": "1450",
+        "style": "Renaissance Polyphony",
+        "mood": "Peaceful",
+        "image": "josquin.jpg",
+        "about": "One of the greatest Renaissance composers and masters of vocal counterpoint.",
+        "songs": [
           {
-            "title":"Ave Maria",
-            "youtube":
-            "https://www.youtube.com/results?search_query=Josquin+Ave+Maria"
+            "title": "Ave Maria",
+            "youtube": "https://www.youtube.com/results?search_query=Josquin+Ave+Maria"
           }
         ]
       },
 
 
       {
-        "name":"Giovanni Pierluigi da Palestrina",
-
-        "style":"Sacred Choral",
-
-        "birth":"1525",
-
-        "image":"palestrina.jpg",
-
-        "about":
-        "Famous for elegant and pure Renaissance church music.",
-
-
-        "songs":[
+        "name": "Giovanni Pierluigi da Palestrina",
+        "birth": "1525",
+        "style": "Sacred Choral",
+        "mood": "Peaceful",
+        "image": "palestrina.jpg",
+        "about": "Italian composer famous for elegant church music and flawless vocal writing.",
+        "songs": [
           {
-            "title":"Missa Papae Marcelli",
-            "youtube":
-            "https://www.youtube.com/results?search_query=Palestrina+Missa+Papae+Marcelli"
+            "title": "Missa Papae Marcelli",
+            "youtube": "https://www.youtube.com/results?search_query=Palestrina+Missa+Papae+Marcelli"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Thomas Tallis",
+        "birth": "1505",
+        "style": "English Renaissance",
+        "mood": "Dramatic",
+        "image": "tallis.jpg",
+        "about": "English composer known for rich sacred works and complex vocal textures.",
+        "songs": [
+          {
+            "title": "Spem in Alium",
+            "youtube": "https://www.youtube.com/results?search_query=Tallis+Spem+in+Alium"
           }
         ]
       }
 
     ]
-
   },
 
 
   "Baroque": {
 
-    "years":"1600-1750",
+    "years": "1600-1750",
 
-    "description":
-    "Opera, concerto, ornamentation, and complex musical structures.",
+    "description": "Opera, concerto, ornamentation, and highly structured musical architecture.",
 
 
-    "composers":[
-
+    "composers": [
 
       {
-        "name":"Johann Sebastian Bach",
-
-        "style":
-        "Counterpoint / Organ / Orchestra",
-
-        "birth":"1685",
-
-        "image":"bach.jpg",
-
-        "about":
-        "The supreme master of counterpoint and harmonic structure.",
-
-
-        "songs":[
-
+        "name": "Johann Sebastian Bach",
+        "birth": "1685",
+        "style": "Counterpoint / Organ / Orchestra",
+        "mood": "Powerful",
+        "image": "bach.jpg",
+        "about": "A supreme master of harmony and counterpoint whose works influenced generations of composers.",
+        "songs": [
           {
-            "title":"Brandenburg Concerto No.3",
-
-            "youtube":
-            "https://www.youtube.com/results?search_query=Bach+Brandenburg+Concerto+No+3"
+            "title": "Brandenburg Concerto No. 3",
+            "youtube": "https://www.youtube.com/results?search_query=Bach+Brandenburg+Concerto+No+3"
           },
-
           {
-            "title":"Cello Suite No.1",
-
-            "youtube":
-            "https://www.youtube.com/results?search_query=Bach+Cello+Suite+No+1"
+            "title": "Cello Suite No.1",
+            "youtube": "https://www.youtube.com/results?search_query=Bach+Cello+Suite+No+1"
           }
-
         ]
-
       },
 
 
       {
-        "name":"Antonio Vivaldi",
-
-        "style":"Violin Concerto",
-
-        "birth":"1678",
-
-        "image":"vivaldi.jpg",
-
-        "about":
-        "Italian composer famous for The Four Seasons.",
-
-
-        "songs":[
-
+        "name": "Antonio Vivaldi",
+        "birth": "1678",
+        "style": "Violin Concerto",
+        "mood": "Powerful",
+        "image": "vivaldi.jpg",
+        "about": "Italian composer famous for energetic concertos including The Four Seasons.",
+        "songs": [
           {
-            "title":"The Four Seasons",
-
-            "youtube":
-            "https://www.youtube.com/results?search_query=Vivaldi+Four+Seasons"
+            "title": "The Four Seasons",
+            "youtube": "https://www.youtube.com/results?search_query=Vivaldi+Four+Seasons"
           }
-
         ]
-
       },
 
 
       {
-        "name":"George Frideric Handel",
-
-        "style":"Opera / Oratorio",
-
-        "birth":"1685",
-
-        "image":"handel.jpg",
-
-        "about":
-        "Created some of the most famous English-language oratorios.",
-
-
-        "songs":[
-
+        "name": "George Frideric Handel",
+        "birth": "1685",
+        "style": "Opera / Oratorio",
+        "mood": "Dramatic",
+        "image": "handel.jpg",
+        "about": "Composer of Messiah and some of the greatest Baroque dramatic works.",
+        "songs": [
           {
-            "title":"Messiah",
-
-            "youtube":
-            "https://www.youtube.com/results?search_query=Handel+Messiah"
+            "title": "Messiah",
+            "youtube": "https://www.youtube.com/results?search_query=Handel+Messiah"
           }
-
         ]
-
       }
 
     ]
+  },
 
+
+  "Classical": {
+
+    "years": "1750-1820",
+
+    "description": "Clarity, balance, elegant melodies, and the development of the symphony.",
+
+
+    "composers": [
+
+      {
+        "name": "Wolfgang Amadeus Mozart",
+        "birth": "1756",
+        "style": "Symphony / Opera / Chamber",
+        "mood": "Peaceful",
+        "image": "mozart.jpg",
+        "about": "Child prodigy who created some of the most recognizable music in history.",
+        "songs": [
+          {
+            "title": "Eine kleine Nachtmusik",
+            "youtube": "https://www.youtube.com/results?search_query=Mozart+Eine+kleine+Nachtmusik"
+          },
+          {
+            "title": "Symphony No.40",
+            "youtube": "https://www.youtube.com/results?search_query=Mozart+Symphony+40"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Joseph Haydn",
+        "birth": "1732",
+        "style": "Symphony / String Quartet",
+        "mood": "Peaceful",
+        "image": "haydn.jpg",
+        "about": "Known as the father of the symphony and string quartet.",
+        "songs": [
+          {
+            "title": "Surprise Symphony",
+            "youtube": "https://www.youtube.com/results?search_query=Haydn+Surprise+Symphony"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Ludwig van Beethoven",
+        "birth": "1770",
+        "style": "Symphony / Piano",
+        "mood": "Powerful",
+        "image": "beethoven.jpg",
+        "about": "A revolutionary composer who transformed Classical music into Romantic expression.",
+        "songs": [
+          {
+            "title": "Symphony No.5",
+            "youtube": "https://www.youtube.com/results?search_query=Beethoven+Symphony+5"
+          },
+          {
+            "title": "Moonlight Sonata",
+            "youtube": "https://www.youtube.com/results?search_query=Beethoven+Moonlight+Sonata"
+          }
+        ]
+      }
+
+    ]
   }
-
 }
