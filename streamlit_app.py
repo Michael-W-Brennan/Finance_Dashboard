@@ -1,8 +1,8 @@
 import streamlit as st
 import json
 import os
+import requests
 import streamlit.components.v1 as components
-
 
 
 # =====================================================
@@ -18,126 +18,80 @@ st.set_page_config(
 
 
 # =====================================================
-# CUSTOM DESIGN
+# DESIGN
 # =====================================================
 
 st.markdown(
-    """
-
+"""
 <style>
 
-
 body {
-
-    background-color:#0b0e14;
-
+    background-color:#0c1018;
 }
 
 
 .main {
-
-    background-color:#0b0e14;
-
+    background-color:#0c1018;
 }
 
 
-
-/* Main title */
-
 h1 {
 
-    color:#e7c66b;
-
+    color:#e8c46a;
     font-family:Georgia, serif;
-
     text-align:center;
 
 }
 
 
+h2,h3 {
 
-h2, h3 {
-
-    color:#e7c66b;
-
+    color:#e8c46a;
     font-family:Georgia, serif;
 
 }
 
 
-
-/* Composer card */
-
-
 .composer-card {
 
     background:
-
     linear-gradient(
-        135deg,
-        #171b26,
-        #10131a
+        145deg,
+        #171c27,
+        #10141d
     );
-
 
     border-radius:18px;
 
-
     padding:30px;
 
-
-    margin-bottom:30px;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.08);
-
+    margin-bottom:25px;
 
 }
 
 
-
-/* Information labels */
-
-
 .label {
 
-    color:#e7c66b;
-
+    color:#e8c46a;
     font-weight:bold;
 
 }
 
 
-
-/* Era buttons */
-
-section[data-testid="stSidebar"] {
-
-    background-color:#11151d;
-
-}
-
-
-
 </style>
 
 """,
-
 unsafe_allow_html=True
-
 )
 
 
 
 # =====================================================
-# LOAD JSON DATABASE
+# LOAD JSON
 # =====================================================
 
 
 @st.cache_data
-
 def load_database():
 
 
@@ -155,17 +109,82 @@ def load_database():
 
     with open(
         "composers.json",
-        "r",
         encoding="utf-8"
-    ) as file:
+    ) as f:
 
-
-        return json.load(file)
-
+        return json.load(f)
 
 
 
-music_database = load_database()
+music = load_database()
+
+
+
+# =====================================================
+# AUTOMATIC PORTRAIT LOOKUP
+# =====================================================
+
+
+@st.cache_data
+def get_portrait(person_name):
+
+    try:
+
+        url = (
+            "https://en.wikipedia.org/w/api.php"
+        )
+
+
+        params = {
+
+            "action":"query",
+
+            "format":"json",
+
+            "prop":"pageimages",
+
+            "piprop":"original",
+
+            "titles":person_name
+
+        }
+
+
+        response = requests.get(
+
+            url,
+
+            params=params,
+
+            timeout=5
+
+        )
+
+
+        data = response.json()
+
+
+
+        pages = data["query"]["pages"]
+
+
+
+        for page in pages.values():
+
+
+            if "original" in page:
+
+                return page["original"]["source"]
+
+
+
+    except Exception:
+
+        pass
+
+
+
+    return None
 
 
 
@@ -180,18 +199,18 @@ st.title(
 
 
 st.markdown(
-    """
-    <center>
 
-    Explore the great composers of Western classical music.
+"""
+<center>
 
-    Choose a historical period from the left menu
-    and enter a musical exhibit.
+A digital museum exploring the composers,
+styles, and masterpieces of classical music.
 
-    </center>
-    """,
+</center>
 
-    unsafe_allow_html=True
+""",
+
+unsafe_allow_html=True
 
 )
 
@@ -202,7 +221,7 @@ st.divider()
 
 
 # =====================================================
-# LEFT MENU
+# SIDEBAR
 # =====================================================
 
 
@@ -213,14 +232,14 @@ st.sidebar.title(
 
 
 eras = list(
-    music_database.keys()
+    music.keys()
 )
 
 
 
 selected_era = st.sidebar.radio(
 
-    "Select an era",
+    "Choose an era",
 
     eras
 
@@ -228,77 +247,63 @@ selected_era = st.sidebar.radio(
 
 
 
-# Current era data
-
-era_data = music_database[selected_era]
+era = music[selected_era]
 
 
-
-# Sidebar description
 
 st.sidebar.divider()
 
 
-st.sidebar.markdown(
 
-f"""
+st.sidebar.write(
 
-### {selected_era}
-
-
-**Period**
-
-{era_data["years"]}
-
-
----
-
-{era_data["description"]}
-
-
-"""
+era["years"]
 
 )
 
 
+st.sidebar.caption(
 
-# =====================================================
-# MAIN AREA HEADER
-# =====================================================
+era["description"]
+
+)
+
 
 
 st.header(
-    f"🎼 {selected_era}"
-)
 
+f"🎼 {selected_era}"
+
+)
 
 
 st.caption(
 
-era_data["description"]
+era["description"]
 
 )
 # =====================================================
-# COMPOSER EXHIBIT DISPLAY
+# COMPOSER EXHIBITS
 # =====================================================
 
 
-for composer in era_data["composers"]:
+for composer in era["composers"]:
 
 
     st.markdown(
+
         '<div class="composer-card">',
+
         unsafe_allow_html=True
+
     )
 
 
-
-    image_column, info_column = st.columns(
+    image_col, info_col = st.columns(
 
         [1, 2]
 
     )
-
 
 
     # =================================================
@@ -306,24 +311,32 @@ for composer in era_data["composers"]:
     # =================================================
 
 
-    with image_column:
+    with image_col:
 
 
-        try:
+        portrait = get_portrait(
+
+            composer["name"]
+
+        )
+
+
+        if portrait:
+
 
             st.image(
 
-                composer["image"],
+                portrait,
 
                 width=260
 
             )
 
 
-        except Exception:
+        else:
 
 
-            st.warning(
+            st.info(
 
                 "Portrait unavailable"
 
@@ -332,11 +345,11 @@ for composer in era_data["composers"]:
 
 
     # =================================================
-    # COMPOSER INFORMATION
+    # INFORMATION
     # =================================================
 
 
-    with info_column:
+    with info_col:
 
 
         st.subheader(
@@ -361,7 +374,7 @@ for composer in era_data["composers"]:
 
 
         <span class="label">
-        Musical Style:
+        Style:
         </span>
 
         {composer["style"]}
@@ -387,10 +400,9 @@ for composer in era_data["composers"]:
 
         st.markdown(
 
-            "### 🎵 Famous Works"
+            "### 🎵 Major Works"
 
         )
-
 
 
         for song in composer["songs"]:
@@ -398,7 +410,7 @@ for composer in era_data["composers"]:
 
             st.write(
 
-                "• " + song["title"]
+                "🎼 " + song["title"]
 
             )
 
@@ -413,10 +425,9 @@ for composer in era_data["composers"]:
     )
 
 
-
     st.divider()
     # =====================================================
-# MUSIC LISTENING SECTION
+# LISTENING EXPERIENCE
 # =====================================================
 
 
@@ -428,12 +439,11 @@ st.header(
 )
 
 
-
 st.markdown(
 
 """
-Select a composer above to explore their famous works.
-Choose a piece below to play it directly inside the exhibit.
+Choose a composer and listen to a featured performance
+directly inside the exhibit.
 
 """
 
@@ -441,24 +451,23 @@ Choose a piece below to play it directly inside the exhibit.
 
 
 
-# =====================================================
-# CREATE GLOBAL MUSIC SELECTOR
-# =====================================================
+# -----------------------------------------------------
+# Composer selector
+# -----------------------------------------------------
 
 
 composer_names = [
 
     composer["name"]
 
-    for composer in era_data["composers"]
+    for composer in era["composers"]
 
 ]
 
 
+chosen_composer_name = st.selectbox(
 
-selected_composer_name = st.selectbox(
-
-    "Choose a composer",
+    "Composer",
 
     composer_names
 
@@ -466,56 +475,60 @@ selected_composer_name = st.selectbox(
 
 
 
-selected_composer = next(
+chosen_composer = next(
 
-    composer
+    c
 
-    for composer in era_data["composers"]
+    for c in era["composers"]
 
-    if composer["name"] == selected_composer_name
+    if c["name"] == chosen_composer_name
 
 )
 
 
 
-song_names = [
+# -----------------------------------------------------
+# Song selector
+# -----------------------------------------------------
+
+
+song_titles = [
 
     song["title"]
 
-    for song in selected_composer["songs"]
+    for song in chosen_composer["songs"]
 
 ]
 
 
+chosen_song_title = st.selectbox(
 
-selected_song_name = st.selectbox(
+    "Composition",
 
-    "Choose a composition",
-
-    song_names
+    song_titles
 
 )
 
 
 
-selected_song = next(
+chosen_song = next(
 
     song
 
-    for song in selected_composer["songs"]
+    for song in chosen_composer["songs"]
 
-    if song["title"] == selected_song_name
+    if song["title"] == chosen_song_title
 
 )
 
 
 
-# =====================================================
-# YOUTUBE EMBED PLAYER
-# =====================================================
+# -----------------------------------------------------
+# YouTube Player
+# -----------------------------------------------------
 
 
-video_id = selected_song["video_id"]
+video_id = chosen_song["video_id"]
 
 
 
@@ -523,26 +536,17 @@ components.html(
 
 f"""
 
-<div style="
-display:flex;
-justify-content:center;
-">
-
 <iframe
 
-width="900"
+width="100%"
 
 height="500"
 
 src="https://www.youtube.com/embed/{video_id}"
 
-title="Classical Music Player"
-
 frameborder="0"
 
-allow=
-
-"accelerometer;
+allow="accelerometer;
 autoplay;
 clipboard-write;
 encrypted-media;
@@ -553,9 +557,6 @@ allowfullscreen>
 
 </iframe>
 
-
-</div>
-
 """,
 
 height=520
@@ -564,9 +565,9 @@ height=520
 
 
 
-# =====================================================
-# EXTERNAL LINK
-# =====================================================
+# -----------------------------------------------------
+# YouTube link
+# -----------------------------------------------------
 
 
 st.markdown(
@@ -575,9 +576,9 @@ f"""
 
 ▶️
 
-[Open this performance on YouTube]
+[Open this performance directly on YouTube]
 
-({selected_song["youtube"]})
+({chosen_song["youtube"]})
 
 """
 
@@ -603,7 +604,7 @@ st.markdown(
 
 <br>
 
-A digital museum of composers and their masterpieces
+Discover composers. Explore history. Listen.
 
 </center>
 
