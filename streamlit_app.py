@@ -1,1026 +1,407 @@
 import streamlit as st
-import random
-import datetime
-import math
-import time
+import urllib.parse
 
 
-# ============================================================
-# PAGE CONFIGURATION
-# ============================================================
+# ----------------------------------------------------
+# PAGE CONFIG
+# ----------------------------------------------------
 
 st.set_page_config(
-    page_title="Python + Streamlit Showcase",
-    page_icon="🐍",
+    page_title="Classical Music Explorer",
+    page_icon="🎼",
     layout="wide"
 )
 
 
-# ============================================================
-# SESSION STATE
-# ============================================================
+# ----------------------------------------------------
+# CUSTOM CSS
+# ----------------------------------------------------
 
-if "click_count" not in st.session_state:
-    st.session_state.click_count = 0
+st.markdown("""
+<style>
 
-if "random_number" not in st.session_state:
-    st.session_state.random_number = 0
+body {
+    background-color:#0e1117;
+}
+
+.main {
+    background-color:#0e1117;
+}
+
+h1 {
+    color:#f5d76e;
+    font-size:45px;
+}
+
+h2 {
+    color:#f5d76e;
+}
+
+h3 {
+    color:#d8d8d8;
+}
+
+.sidebar .sidebar-content {
+    background-color:#111827;
+}
+
+div[data-testid="stDataFrame"] {
+    border-radius:15px;
+}
+
+.stButton button {
+    border-radius:20px;
+    background:#f5d76e;
+    color:black;
+    font-weight:bold;
+}
+
+.card {
+    background:#161b22;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+    border:1px solid #30363d;
+}
+
+.small {
+    color:#bbbbbb;
+    font-size:14px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 
-# ============================================================
-# TITLE AREA
-# ============================================================
+# ----------------------------------------------------
+# DATA
+# ----------------------------------------------------
 
-st.title("🐍 Python + Streamlit Showcase")
+music = {
+
+"Medieval": {
+
+"years":"500 - 1400",
+
+"description":
+"Music of the Middle Ages focused heavily on sacred traditions, Gregorian chant, and the development of early notation systems.",
+
+"composers":[
+
+["Hildegard von Bingen",
+"Medieval Sacred",
+"German abbess and composer known for visionary chants.",
+"Ordo Virtutum"],
+
+["Guillaume de Machaut",
+"Ars Nova",
+"Important French composer who expanded rhythmic complexity.",
+"Messe de Nostre Dame"],
+
+["Léonin",
+"Early Polyphony",
+"One of the first known composers of multi-part music.",
+"Viderunt Omnes"]
+
+]
+
+},
+
+
+"Renaissance": {
+
+"years":"1400 - 1600",
+
+"description":
+"Renaissance music emphasized balance, vocal harmony, and expressive polyphony.",
+
+"composers":[
+
+["Josquin des Prez",
+"Renaissance Polyphony",
+"Master of vocal counterpoint and influential composer.",
+"Ave Maria"],
+
+["Giovanni Pierluigi da Palestrina",
+"Sacred Choral",
+"Famous for elegant church compositions.",
+"Missa Papae Marcelli"],
+
+["Thomas Tallis",
+"English Renaissance",
+"Known for rich and dramatic sacred music.",
+"Spem in Alium"]
+
+]
+
+},
+
+
+"Baroque": {
+
+"years":"1600 - 1750",
+
+"description":
+"The Baroque era introduced opera, concerto form, and elaborate musical expression.",
+
+"composers":[
+
+["Johann Sebastian Bach",
+"Counterpoint / Organ / Orchestra",
+"One of history's greatest composers, famous for mathematical precision.",
+"Brandenburg Concertos"],
+
+["George Frideric Handel",
+"Opera / Oratorio",
+"Known worldwide for Messiah and dramatic works.",
+"Messiah"],
+
+["Antonio Vivaldi",
+"Violin Concerto",
+"Created The Four Seasons and influenced concerto writing.",
+"The Four Seasons"]
+
+]
+
+},
+
+
+"Classical": {
+
+"years":"1750 - 1820",
+
+"description":
+"Classical music emphasized clarity, structure, balance, and elegant melodies.",
+
+"composers":[
+
+["Wolfgang Amadeus Mozart",
+"Symphony / Opera",
+"Child prodigy who created some of the world's most beloved music.",
+"Eine kleine Nachtmusik"],
+
+["Joseph Haydn",
+"Symphony / String Quartet",
+"Father of the symphony and string quartet.",
+"Surprise Symphony"],
+
+["Ludwig van Beethoven",
+"Symphony / Piano",
+"Bridge between Classical and Romantic periods.",
+"Symphony No. 9"]
+
+]
+
+},
+
+
+"Romantic": {
+
+"years":"1820 - 1900",
+
+"description":
+"Romantic composers focused on emotion, individuality, larger orchestras, and dramatic storytelling.",
+
+"composers":[
+
+["Frédéric Chopin",
+"Piano Romanticism",
+"Poet of the piano known for expressive works.",
+"Nocturnes"],
+
+["Johannes Brahms",
+"Symphonic Romantic",
+"Combined classical structure with romantic emotion.",
+"Symphony No. 4"],
+
+["Pyotr Tchaikovsky",
+"Orchestra / Ballet",
+"Famous for emotional melodies and ballet masterpieces.",
+"Swan Lake"]
+
+]
+
+},
+
+
+"Impressionist / Modern": {
+
+"years":"1900 - Present",
+
+"description":
+"Modern composers explored new harmonies, unusual structures, and experimental sounds.",
+
+"composers":[
+
+["Claude Debussy",
+"Impressionism",
+"Created atmospheric music using new harmonic colors.",
+"Clair de Lune"],
+
+["Igor Stravinsky",
+"Modernism",
+"Revolutionized rhythm and orchestral writing.",
+"The Rite of Spring"],
+
+["Dmitri Shostakovich",
+"20th Century Symphony",
+"Known for powerful symphonies and emotional depth.",
+"Symphony No. 5"]
+
+]
+
+}
+
+}
+
+
+
+# ----------------------------------------------------
+# SIDEBAR
+# ----------------------------------------------------
+
+st.sidebar.title("🎼 Music Library")
+
+st.sidebar.write(
+"""
+Explore the major periods of Western classical music.
+
+Select an era:
+"""
+)
+
+
+era = st.sidebar.radio(
+    "Choose Period",
+    list(music.keys())
+)
+
+
+st.sidebar.markdown("---")
+
+st.sidebar.info(
+"""
+Tip:
+Click the YouTube links to hear examples of each composer's style.
+"""
+)
+
+
+# ----------------------------------------------------
+# MAIN DISPLAY
+# ----------------------------------------------------
+
+info = music[era]
+
+
+st.title("🎼 Classical Music Explorer")
 
 st.subheader(
-    "A tour of built-in Streamlit widgets"
-)
-
-st.caption(
-    "This app uses Streamlit plus Python's standard library only."
-)
-
-
-st.divider()
-
-
-# ============================================================
-# INTRO TEXT
-# ============================================================
-
-st.header("Text Components")
-
-
-st.write(
-    "Streamlit allows Python programs to become interactive web applications."
+f"{era} Period ({info['years']})"
 )
 
 
 st.markdown(
-    """
-    ### Markdown Support
+f"""
+<div class="card">
 
-    You can create:
+<h3>About this Era</h3>
 
-    - **Bold text**
-    - *Italic text*
-    - Lists
-    - Tables
-    - Code blocks
-    - Mathematical expressions
-    """
+<p>{info['description']}</p>
+
+</div>
+""",
+unsafe_allow_html=True
 )
 
 
-st.latex(
-    r"E = mc^2"
-)
+
+# ----------------------------------------------------
+# TABLE
+# ----------------------------------------------------
+
+st.subheader("Famous Composers")
 
 
-with st.expander("Click to see hidden information"):
+table = []
 
-    st.write(
-        """
-        Expanders are useful for:
-        
-        - documentation
-        - settings
-        - advanced options
-        """
+for c in info["composers"]:
+
+    table.append(
+        {
+        "Composer":c[0],
+        "Style":c[1],
+        "Notes":c[2],
+        "Famous Work":c[3]
+        }
+    )
+
+
+st.table(table)
+
+
+
+# ----------------------------------------------------
+# YOUTUBE LINKS
+# ----------------------------------------------------
+
+st.subheader("🎧 Listen")
+
+
+for composer in info["composers"]:
+
+    name = composer[0]
+    piece = composer[3]
+
+
+    query = urllib.parse.quote(
+        f"{name} {piece} classical music"
+    )
+
+
+    youtube = (
+        "https://www.youtube.com/results?search_query="
+        + query
+    )
+
+
+    st.markdown(
+        f"""
+        <div class="card">
+
+        <h3>{name}</h3>
+
+        <p>
+        Recommended piece:
+        <b>{piece}</b>
+        </p>
+
+        <a href="{youtube}" target="_blank">
+        ▶ Search YouTube
+        </a>
+
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
 
 
-# ============================================================
-# COLUMNS
-# ============================================================
+# ----------------------------------------------------
+# FOOTER
+# ----------------------------------------------------
 
-st.header("Column Layout")
+st.markdown("---")
 
-
-col1, col2, col3 = st.columns(3)
-
-
-with col1:
-
-    st.metric(
-        "CPU Usage",
-        "42%",
-        "+5%"
-    )
-
-
-with col2:
-
-    st.metric(
-        "Users",
-        "12,450",
-        "+320"
-    )
-
-
-with col3:
-
-    st.metric(
-        "Revenue",
-        "$84K",
-        "+12%"
-    )
-
-
-
-st.divider()
-
-
-# ============================================================
-# BUTTONS
-# ============================================================
-
-st.header("Buttons")
-
-
-if st.button("Click Me"):
-
-    st.session_state.click_count += 1
-
-
-st.write(
-    f"You clicked the button {st.session_state.click_count} times."
-)
-
-
-if st.button("Generate Random Number"):
-
-    st.session_state.random_number = random.randint(
-        1,
-        1000
-    )
-
-
-st.success(
-    f"Random number: {st.session_state.random_number}"
-)
-# ============================================================
-# INPUT WIDGETS
-# ============================================================
-
-st.header("Input Widgets")
-
-
-# ------------------------------------------------------------
-# Slider
-# ------------------------------------------------------------
-
-st.subheader("Slider")
-
-volume = st.slider(
-    "Volume",
-    min_value=0,
-    max_value=100,
-    value=50
-)
-
-st.write(
-    f"Volume setting: {volume}"
-)
-
-
-
-# ------------------------------------------------------------
-# Range Slider
-# ------------------------------------------------------------
-
-st.subheader("Range Slider")
-
-price_range = st.slider(
-    "Select a price range",
-    0,
-    1000,
-    (100, 500)
-)
-
-st.write(
-    f"Selected range: {price_range}"
-)
-
-
-
-# ------------------------------------------------------------
-# Number Input
-# ------------------------------------------------------------
-
-st.subheader("Number Input")
-
-age = st.number_input(
-    "Enter your age",
-    min_value=0,
-    max_value=120,
-    value=30
-)
-
-st.write(
-    f"Age: {age}"
-)
-
-
-
-# ------------------------------------------------------------
-# Text Input
-# ------------------------------------------------------------
-
-st.subheader("Text Input")
-
-username = st.text_input(
-    "Username",
-    placeholder="Enter your name"
-)
-
-
-if username:
-
-    st.info(
-        f"Hello {username}"
-    )
-
-
-
-# ------------------------------------------------------------
-# Text Area
-# ------------------------------------------------------------
-
-st.subheader("Text Area")
-
-message = st.text_area(
-    "Write a message"
-)
-
-
-if message:
-
-    st.write(
-        "You wrote:"
-    )
-
-    st.code(
-        message
-    )
-
-
-
-# ------------------------------------------------------------
-# Radio Buttons
-# ------------------------------------------------------------
-
-st.subheader("Radio Buttons")
-
-
-language = st.radio(
-    "Choose a programming language",
-    [
-        "Python",
-        "JavaScript",
-        "C++",
-        "Rust"
-    ]
-)
-
-
-st.write(
-    f"Selected: {language}"
-)
-
-
-
-# ------------------------------------------------------------
-# Select Box
-# ------------------------------------------------------------
-
-st.subheader("Select Box")
-
-
-country = st.selectbox(
-    "Select a country",
-    [
-        "United States",
-        "Canada",
-        "United Kingdom",
-        "Japan",
-        "Germany"
-    ]
-)
-
-
-st.write(
-    f"Country: {country}"
-)
-
-
-
-# ------------------------------------------------------------
-# Multiselect
-# ------------------------------------------------------------
-
-st.subheader("Multiselect")
-
-
-skills = st.multiselect(
-    "Choose skills",
-    [
-        "Python",
-        "Data Science",
-        "AI",
-        "Web Development",
-        "Finance",
-        "Game Development"
-    ]
-)
-
-
-st.write(
-    "Selected skills:",
-    skills
-)
-
-
-
-# ------------------------------------------------------------
-# Checkbox
-# ------------------------------------------------------------
-
-st.subheader("Checkbox")
-
-
-dark_mode = st.checkbox(
-    "Enable dark mode"
-)
-
-
-if dark_mode:
-
-    st.success(
-        "Dark mode enabled"
-    )
-
-else:
-
-    st.warning(
-        "Dark mode disabled"
-    )
-
-
-
-# ------------------------------------------------------------
-# Date Input
-# ------------------------------------------------------------
-
-st.subheader("Date Picker")
-
-
-birthday = st.date_input(
-    "Select a date",
-    datetime.date.today()
-)
-
-
-st.write(
-    f"Selected date: {birthday}"
-)
-
-
-
-# ------------------------------------------------------------
-# Time Input
-# ------------------------------------------------------------
-
-st.subheader("Time Picker")
-
-
-meeting_time = st.time_input(
-    "Choose a time"
-)
-
-
-st.write(
-    f"Time selected: {meeting_time}"
-)
-
-
-
-# ------------------------------------------------------------
-# Color Picker
-# ------------------------------------------------------------
-
-st.subheader("Color Picker")
-
-
-color = st.color_picker(
-    "Choose a color",
-    "#00FF00"
-)
-
-
-st.write(
-    f"Selected color: {color}"
-)
-
-
-st.divider()
-# ============================================================
-# ADVANCED STREAMLIT FEATURES
-# ============================================================
-
-st.header("Advanced Components")
-
-
-
-# ------------------------------------------------------------
-# Progress Bar
-# ------------------------------------------------------------
-
-st.subheader("Progress Bar")
-
-
-progress = st.progress(0)
-
-
-if st.button("Run Progress Demo"):
-
-    for i in range(101):
-
-        progress.progress(i)
-
-        time.sleep(0.01)
-
-
-    st.success(
-        "Complete!"
-    )
-
-
-
-# ------------------------------------------------------------
-# Status Messages
-# ------------------------------------------------------------
-
-st.subheader("Status Messages")
-
-
-st.success(
-    "Operation completed successfully."
-)
-
-
-st.info(
-    "This is an information message."
-)
-
-
-st.warning(
-    "This is a warning message."
-)
-
-
-st.error(
-    "This is an error message."
-)
-
-
-
-# ------------------------------------------------------------
-# Spinner
-# ------------------------------------------------------------
-
-st.subheader("Spinner")
-
-
-if st.button("Run Task"):
-
-    with st.spinner(
-        "Processing..."
-    ):
-
-        time.sleep(2)
-
-
-    st.success(
-        "Task finished!"
-    )
-
-
-
-# ------------------------------------------------------------
-# Built-in Charts
-# ------------------------------------------------------------
-
-st.subheader("Charts")
-
-
-chart_data = []
-
-for i in range(20):
-
-    chart_data.append(
-        random.randint(
-            10,
-            100
-        )
-    )
-
-
-st.line_chart(
-    chart_data
-)
-
-
-st.bar_chart(
-    chart_data
-)
-
-
-st.area_chart(
-    chart_data
-)
-
-
-
-# ------------------------------------------------------------
-# File Upload
-# ------------------------------------------------------------
-
-st.subheader("File Upload")
-
-
-uploaded_file = st.file_uploader(
-    "Upload a text file"
-)
-
-
-if uploaded_file:
-
-
-    contents = uploaded_file.read()
-
-
-    st.write(
-        "File size:",
-        len(contents),
-        "bytes"
-    )
-
-
-    st.code(
-        contents.decode(
-            errors="ignore"
-        )
-    )
-
-
-
-# ------------------------------------------------------------
-# Tabs
-# ------------------------------------------------------------
-
-st.subheader("Tabs")
-
-
-tab1, tab2, tab3 = st.tabs(
-    [
-        "Python",
-        "Math",
-        "About"
-    ]
-)
-
-
-
-with tab1:
-
-    st.write(
-        "Python is a powerful general-purpose language."
-    )
-
-    st.code(
-        """
-print("Hello Streamlit")
-        """
-    )
-
-
-
-with tab2:
-
-    st.write(
-        "Simple calculator"
-    )
-
-
-    x = st.number_input(
-        "Number A",
-        value=5
-    )
-
-
-    y = st.number_input(
-        "Number B",
-        value=10
-    )
-
-
-    st.write(
-        "Result:",
-        x + y
-    )
-
-
-
-with tab3:
-
-    st.write(
-        "This tab demonstrates Streamlit navigation."
-    )
-
-
-
-# ------------------------------------------------------------
-# Forms
-# ------------------------------------------------------------
-
-st.subheader("Forms")
-
-
-with st.form(
-    "user_form"
-):
-
-
-    name = st.text_input(
-        "Name"
-    )
-
-
-    occupation = st.selectbox(
-        "Occupation",
-        [
-            "Developer",
-            "Engineer",
-            "Student",
-            "Other"
-        ]
-    )
-
-
-    submitted = st.form_submit_button(
-        "Submit"
-    )
-
-
-
-    if submitted:
-
-        st.success(
-            f"{name} - {occupation}"
-        )
-
-
-
-# ------------------------------------------------------------
-# Code Display
-# ------------------------------------------------------------
-
-st.subheader(
-    "Code Viewer"
-)
-
-
-sample_code = """
-
-def hello():
-
-    print("Hello from Python")
-
+st.markdown(
 """
-
-
-st.code(
-    sample_code,
-    language="python"
-)
-
-
-st.divider()
-# ============================================================
-# FINAL SHOWCASE FEATURES
-# ============================================================
-
-
-st.header("Final Streamlit Showcase Features")
-
-
-
-# ------------------------------------------------------------
-# Sidebar Showcase
-# ------------------------------------------------------------
-
-st.sidebar.title(
-    "🐍 Sidebar Controls"
-)
-
-
-sidebar_choice = st.sidebar.selectbox(
-    "Choose a section",
-    [
-        "Dashboard",
-        "Analytics",
-        "Settings",
-        "About"
-    ]
-)
-
-
-sidebar_slider = st.sidebar.slider(
-    "Sidebar Slider",
-    0,
-    100,
-    50
-)
-
-
-sidebar_check = st.sidebar.checkbox(
-    "Enable notifications"
-)
-
-
-st.sidebar.write(
-    f"Selected: {sidebar_choice}"
-)
-
-
-st.sidebar.write(
-    f"Slider value: {sidebar_slider}"
-)
-
-
-
-# ------------------------------------------------------------
-# Containers
-# ------------------------------------------------------------
-
-st.subheader(
-    "Containers"
-)
-
-
-with st.container():
-
-    st.write(
-        "This entire area is inside a container."
-    )
-
-    st.info(
-        "Containers help organize applications."
-    )
-
-
-
-# ------------------------------------------------------------
-# Data Editor
-# ------------------------------------------------------------
-
-st.subheader(
-    "Interactive Data Editor"
-)
-
-
-sample_table = [
-
-    {
-        "Name": "Alice",
-        "Score": 95
-    },
-
-    {
-        "Name": "Bob",
-        "Score": 88
-    },
-
-    {
-        "Name": "Charlie",
-        "Score": 76
-    }
-
-]
-
-
-edited_data = st.data_editor(
-    sample_table,
-    num_rows="dynamic"
-)
-
-
-st.write(
-    "Current table:"
-)
-
-
-st.write(
-    edited_data
-)
-
-
-
-# ------------------------------------------------------------
-# Random Generator
-# ------------------------------------------------------------
-
-st.subheader(
-    "Random Generators"
-)
-
-
-random_col1, random_col2 = st.columns(2)
-
-
-
-with random_col1:
-
-
-    if st.button(
-        "Roll Dice 🎲"
-    ):
-
-        dice = random.randint(
-            1,
-            6
-        )
-
-        st.success(
-            f"You rolled {dice}"
-        )
-
-
-
-with random_col2:
-
-
-    if st.button(
-        "Generate Password 🔐"
-    ):
-
-
-        chars = (
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            "abcdefghijklmnopqrstuvwxyz"
-            "0123456789"
-        )
-
-
-        password = ""
-
-
-        for i in range(12):
-
-            password += random.choice(
-                chars
-            )
-
-
-        st.code(
-            password
-        )
-
-
-
-# ------------------------------------------------------------
-# Mini Calculator
-# ------------------------------------------------------------
-
-st.subheader(
-    "Mini Calculator"
-)
-
-
-calc1, calc2 = st.columns(2)
-
-
-
-with calc1:
-
-    number_a = st.number_input(
-        "Number 1",
-        value=10
-    )
-
-
-with calc2:
-
-    number_b = st.number_input(
-        "Number 2",
-        value=5
-    )
-
-
-
-operation = st.radio(
-    "Operation",
-    [
-        "Add",
-        "Subtract",
-        "Multiply",
-        "Divide"
-    ]
-)
-
-
-
-if operation == "Add":
-
-    result = number_a + number_b
-
-
-elif operation == "Subtract":
-
-    result = number_a - number_b
-
-
-elif operation == "Multiply":
-
-    result = number_a * number_b
-
-
-else:
-
-    if number_b != 0:
-
-        result = number_a / number_b
-
-    else:
-
-        result = "Cannot divide by zero"
-
-
-
-st.success(
-    f"Result: {result}"
-)
-
-
-
-# ------------------------------------------------------------
-# Math Demo
-# ------------------------------------------------------------
-
-st.subheader(
-    "Python Math Demo"
-)
-
-
-angle = st.slider(
-    "Angle",
-    0,
-    360,
-    45
-)
-
-
-radians = math.radians(
-    angle
-)
-
-
-st.write(
-    "Sine:",
-    math.sin(radians)
-)
-
-
-st.write(
-    "Cosine:",
-    math.cos(radians)
-)
-
-
-
-# ------------------------------------------------------------
-# Final Banner
-# ------------------------------------------------------------
-
-st.divider()
-
-
-st.balloons()
-
-
-st.success(
-    """
-    🎉 Showcase Complete!
-
-    You have explored many of Streamlit's built-in capabilities
-    using only Python and Streamlit.
-    """
-)
-
-
-st.caption(
-    "End of Python + Streamlit Showcase"
+<center>
+
+🎻 Classical Music Explorer  
+<br>
+Built entirely with Python + Streamlit
+
+</center>
+""",
+unsafe_allow_html=True
 )
