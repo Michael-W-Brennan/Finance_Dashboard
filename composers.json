@@ -1,0 +1,153 @@
+{
+    "Baroque": {
+        "years": "1600-1750",
+        "description": "The Baroque era introduced opera, concerto form, and elaborate musical expression.",
+
+        "composers": [
+
+            {
+                "name": "Johann Sebastian Bach",
+                "style": "Counterpoint / Organ / Orchestra",
+                "about": "German master of harmony and counterpoint. His works represent the peak of Baroque musical architecture.",
+
+                "songs": [
+                    {
+                        "title": "Brandenburg Concerto No. 3",
+                        "youtube": "https://www.youtube.com/watch?v=hZ9qWpa2rIg"
+                    },
+                    {
+                        "title": "Cello Suite No.1",
+                        "youtube": "https://www.youtube.com/watch?v=1prweT95Mo0"
+                    },
+                    {
+                        "title": "Toccata and Fugue",
+                        "youtube": "https://www.youtube.com/watch?v=ho9rZjlsyYY"
+                    }
+                ]
+            },
+
+
+            {
+                "name": "Antonio Vivaldi",
+                "style": "Violin Concerto",
+                "about": "Venetian composer famous for The Four Seasons and energetic concertos.",
+
+                "songs": [
+                    {
+                        "title": "Spring - Four Seasons",
+                        "youtube": "https://www.youtube.com/watch?v=mFWQgxXM_b8"
+                    },
+                    {
+                        "title": "Summer - Four Seasons",
+                        "youtube": "https://www.youtube.com/watch?v=Z21_VpN8v2I"
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    "Classical": {
+
+        "years": "1750-1820",
+
+        "description":
+        "The Classical period emphasized balance, clarity, and elegant structure.",
+
+
+        "composers": [
+
+            {
+                "name": "Wolfgang Amadeus Mozart",
+
+                "style":
+                "Symphony / Opera / Chamber",
+
+                "about":
+                "Child prodigy who created some of history's most beloved melodies.",
+
+
+                "songs": [
+
+                    {
+                        "title":"Eine kleine Nachtmusik",
+                        "youtube":"https://www.youtube.com/watch?v=oy2zDJPIgwc"
+                    },
+
+                    {
+                        "title":"Symphony No.40",
+                        "youtube":"https://www.youtube.com/watch?v=JTc1mDieQI8"
+                    }
+
+                ]
+            },
+
+
+            {
+                "name":"Joseph Haydn",
+
+                "style":
+                "Symphony / String Quartet",
+
+                "about":
+                "Known as the father of the symphony and string quartet.",
+
+
+                "songs":[
+
+                    {
+                        "title":"Surprise Symphony",
+                        "youtube":"https://www.youtube.com/watch?v=tF5kr251BRs"
+                    }
+
+                ]
+
+            }
+
+        ]
+
+    },
+
+
+    "Romantic": {
+
+        "years":"1820-1900",
+
+        "description":
+        "Romantic composers focused on emotion, imagination, and dramatic storytelling.",
+
+
+        "composers":[
+
+
+            {
+                "name":"Ludwig van Beethoven",
+
+                "style":
+                "Symphony / Piano",
+
+                "about":
+                "A revolutionary composer who transformed classical music.",
+
+
+                "songs":[
+
+                    {
+                        "title":"Symphony No.5",
+                        "youtube":"https://www.youtube.com/watch?v=fOk8Tm815lE"
+                    },
+
+                    {
+                        "title":"Moonlight Sonata",
+                        "youtube":"https://www.youtube.com/watch?v=4Tr0otuiQuU"
+                    }
+
+                ]
+
+            }
+
+        ]
+
+    }
+
+}
