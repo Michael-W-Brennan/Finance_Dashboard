@@ -1,253 +1,159 @@
 {
   "Medieval": {
-
     "years": "500-1400",
-
     "description": "Sacred chant, early notation, and the beginnings of Western polyphony.",
-
-
     "composers": [
-
       {
         "name": "Hildegard von Bingen",
+        "portrait": "Hildegard von Bingen",
         "birth": "1098",
         "style": "Sacred Chant",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hildegard_von_Bingen.jpg/800px-Hildegard_von_Bingen.jpg",
-
         "about": "German abbess, composer, writer, and visionary known for mystical sacred music.",
-
         "songs": [
-
           {
             "title": "O Virtus Sapientiae",
             "youtube": "https://www.youtube.com/watch?v=Q8g9cM8rj9U",
             "video_id": "Q8g9cM8rj9U"
           }
-
         ]
       },
-
-
       {
         "name": "Guillaume de Machaut",
+        "portrait": "Guillaume de Machaut",
         "birth": "1300",
         "style": "Ars Nova Polyphony",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Guillaume_de_Machaut.jpg/800px-Guillaume_de_Machaut.jpg",
-
         "about": "French composer who expanded rhythmic complexity and helped define late Medieval music.",
-
         "songs": [
-
           {
             "title": "Messe de Nostre Dame",
             "youtube": "https://www.youtube.com/watch?v=1gEV42RKf6E",
             "video_id": "1gEV42RKf6E"
           }
-
         ]
       }
-
     ]
-
   },
 
 
   "Renaissance": {
-
     "years": "1400-1600",
-
-    "description": "The Renaissance brought balanced polyphony, expressive vocal writing, and the golden age of choral music.",
-
-
+    "description": "Balanced polyphony, expressive vocal writing, and the golden age of choral music.",
     "composers": [
-
       {
         "name": "Josquin des Prez",
+        "portrait": "Josquin des Prez",
         "birth": "1450",
         "style": "Renaissance Polyphony",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Josquin_des_Prez.jpg/800px-Josquin_des_Prez.jpg",
-
         "about": "One of the greatest masters of Renaissance counterpoint and vocal composition.",
-
         "songs": [
-
           {
             "title": "Ave Maria",
             "youtube": "https://www.youtube.com/watch?v=Qq5VQXJ7V2U",
             "video_id": "Qq5VQXJ7V2U"
           }
-
         ]
-
       },
-
-
       {
         "name": "Giovanni Pierluigi da Palestrina",
+        "portrait": "Giovanni Pierluigi da Palestrina",
         "birth": "1525",
         "style": "Sacred Choral",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Giovanni_Pierluigi_da_Palestrina.jpg/800px-Giovanni_Pierluigi_da_Palestrina.jpg",
-
         "about": "Italian composer famous for elegant church music and refined vocal harmony.",
-
         "songs": [
-
           {
             "title": "Missa Papae Marcelli",
             "youtube": "https://www.youtube.com/watch?v=BRfF7W4El60",
             "video_id": "BRfF7W4El60"
           }
-
         ]
-
       }
-
     ]
-
   },
-    "Baroque": {
 
+
+  "Baroque": {
     "years": "1600-1750",
-
     "description": "Opera, concerto, ornamentation, and complex musical architecture defined the Baroque era.",
-
-
     "composers": [
-
       {
         "name": "Johann Sebastian Bach",
+        "portrait": "Johann Sebastian Bach",
         "birth": "1685",
         "style": "Counterpoint / Organ / Orchestra",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Johann_Sebastian_Bach.jpg/800px-Johann_Sebastian_Bach.jpg",
-
         "about": "A supreme master of harmony and counterpoint whose works influenced generations of composers.",
-
         "songs": [
-
           {
             "title": "Brandenburg Concerto No. 3",
             "youtube": "https://www.youtube.com/watch?v=hZ9qWpa2rIg",
             "video_id": "hZ9qWpa2rIg"
           },
-
           {
             "title": "Cello Suite No.1",
             "youtube": "https://www.youtube.com/watch?v=1prweT95Mo0",
             "video_id": "1prweT95Mo0"
-          },
-
-          {
-            "title": "Toccata and Fugue in D Minor",
-            "youtube": "https://www.youtube.com/watch?v=ho9rZjlsyYY",
-            "video_id": "ho9rZjlsyYY"
           }
-
         ]
       },
-
-
       {
         "name": "Antonio Vivaldi",
+        "portrait": "Antonio Vivaldi",
         "birth": "1678",
         "style": "Violin Concerto",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Antonio_Vivaldi.jpg/800px-Antonio_Vivaldi.jpg",
-
         "about": "Italian composer famous for hundreds of concertos including The Four Seasons.",
-
         "songs": [
-
           {
             "title": "The Four Seasons - Spring",
             "youtube": "https://www.youtube.com/watch?v=mFWQgxXM_b8",
             "video_id": "mFWQgxXM_b8"
           }
-
         ]
-      },
-
-
+      }
+    ]
+  },
+      "composers": [
       {
         "name": "George Frideric Handel",
+        "portrait": "George Frideric Handel",
         "birth": "1685",
         "style": "Opera / Oratorio",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/George_Frideric_Handel_by_Balthasar_Denner.jpg/800px-George_Frideric_Handel_by_Balthasar_Denner.jpg",
-
         "about": "Composer of Messiah and one of the greatest masters of Baroque drama.",
-
         "songs": [
-
           {
             "title": "Messiah - Hallelujah Chorus",
             "youtube": "https://www.youtube.com/watch?v=IUZEtVbJT5c",
             "video_id": "IUZEtVbJT5c"
           }
-
         ]
-
       },
-
-
       {
         "name": "Domenico Scarlatti",
+        "portrait": "Domenico Scarlatti",
         "birth": "1685",
         "style": "Keyboard Sonata",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Domenico_Scarlatti.jpg/800px-Domenico_Scarlatti.jpg",
-
         "about": "Italian composer famous for hundreds of innovative keyboard sonatas.",
-
         "songs": [
-
           {
             "title": "Keyboard Sonata K141",
             "youtube": "https://www.youtube.com/watch?v=Qj7pJ9g3QJ8",
             "video_id": "Qj7pJ9g3QJ8"
           }
-
         ]
-
       },
-
-
       {
         "name": "Jean-Philippe Rameau",
+        "portrait": "Jean-Philippe Rameau",
         "birth": "1683",
         "style": "French Opera",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Jean-Philippe_Rameau.jpg/800px-Jean-Philippe_Rameau.jpg",
-
         "about": "Important French Baroque composer and music theorist.",
-
         "songs": [
-
           {
             "title": "Les Indes Galantes",
             "youtube": "https://www.youtube.com/watch?v=TF1h6g5fX6A",
             "video_id": "TF1h6g5fX6A"
           }
-
         ]
-
       }
-
     ]
-
   },
 
 
@@ -257,689 +163,512 @@
 
     "description": "The Classical era emphasized balance, clarity, symmetry, and the development of the symphony.",
 
-
     "composers": [
 
       {
         "name": "Wolfgang Amadeus Mozart",
+        "portrait": "Wolfgang Amadeus Mozart",
         "birth": "1756",
         "style": "Symphony / Opera / Chamber",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wolfgang-amadeus-mozart_1.jpg/800px-Wolfgang-amadeus-mozart_1.jpg",
-
         "about": "Child prodigy and one of history's most celebrated composers.",
-
         "songs": [
-
           {
             "title": "Eine kleine Nachtmusik",
             "youtube": "https://www.youtube.com/watch?v=oy2zDJPIgwc",
             "video_id": "oy2zDJPIgwc"
           },
-
           {
             "title": "Symphony No.40",
             "youtube": "https://www.youtube.com/watch?v=JTc1mDieQI8",
             "video_id": "JTc1mDieQI8"
           }
-
         ]
-
       },
 
 
       {
         "name": "Joseph Haydn",
+        "portrait": "Joseph Haydn",
         "birth": "1732",
         "style": "Symphony / String Quartet",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Joseph_Haydn_portrait.jpg/800px-Joseph_Haydn_portrait.jpg",
-
         "about": "Known as the father of the symphony and string quartet.",
-
         "songs": [
-
           {
             "title": "Surprise Symphony",
             "youtube": "https://www.youtube.com/watch?v=lLjwkamp3lI",
             "video_id": "lLjwkamp3lI"
           }
-
         ]
-
       }
+
 
     ]
 
   },
-    "Romantic": {
+
+
+  "Romantic": {
 
     "years": "1820-1900",
 
     "description": "Romantic composers focused on emotion, imagination, individuality, and expanded orchestral expression.",
 
-
     "composers": [
 
       {
         "name": "Ludwig van Beethoven",
+        "portrait": "Ludwig van Beethoven",
         "birth": "1770",
         "style": "Symphony / Piano / Chamber",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/800px-Beethoven.jpg",
-
         "about": "The revolutionary composer who transformed Classical traditions into powerful Romantic expression.",
-
         "songs": [
-
           {
             "title": "Symphony No.5",
             "youtube": "https://www.youtube.com/watch?v=fOk8Tm815lE",
             "video_id": "fOk8Tm815lE"
           },
-
-          {
-            "title": "Symphony No.9",
-            "youtube": "https://www.youtube.com/watch?v=t3217H8JppI",
-            "video_id": "t3217H8JppI"
-          },
-
           {
             "title": "Moonlight Sonata",
             "youtube": "https://www.youtube.com/watch?v=4Tr0otuiQuU",
             "video_id": "4Tr0otuiQuU"
           }
-
         ]
       },
 
 
       {
         "name": "Franz Schubert",
+        "portrait": "Franz Schubert",
         "birth": "1797",
         "style": "Art Song / Symphony",
-        "mood": "Romantic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Franz_Schubert_by_Wilhelm_August_Rieder_1875.jpg/800px-Franz_Schubert_by_Wilhelm_August_Rieder_1875.jpg",
-
         "about": "Master of melody whose songs and chamber works became central to Romantic music.",
-
         "songs": [
-
           {
             "title": "Unfinished Symphony",
             "youtube": "https://www.youtube.com/watch?v=VE5Wqf6r4xA",
             "video_id": "VE5Wqf6r4xA"
-          },
-
-          {
-            "title": "Ave Maria",
-            "youtube": "https://www.youtube.com/watch?v=2bosouX_d8Y",
-            "video_id": "2bosouX_d8Y"
           }
-
         ]
       },
 
 
       {
         "name": "Frédéric Chopin",
+        "portrait": "Frédéric Chopin",
         "birth": "1810",
         "style": "Piano Romanticism",
         "mood": "Romantic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Frederic_Chopin_photo.jpeg/800px-Frederic_Chopin_photo.jpeg",
-
-        "about": "The poet of the piano, famous for expressive nocturnes, études, and poetic piano works.",
-
+        "about": "The poet of the piano, famous for expressive nocturnes and poetic piano works.",
         "songs": [
-
           {
             "title": "Nocturne Op.9 No.2",
             "youtube": "https://www.youtube.com/watch?v=9E6b3swbnWg",
             "video_id": "9E6b3swbnWg"
-          },
-
-          {
-            "title": "Ballade No.1",
-            "youtube": "https://www.youtube.com/watch?v=BSFNl4roGlI",
-            "video_id": "BSFNl4roGlI"
           }
-
         ]
-      },
+      }
 
+    ]
+
+  },
+  "Romantic Continued": {
+
+    "years": "1820-1900",
+
+    "description": "The Romantic era expanded musical expression through powerful emotion, virtuosity, and dramatic storytelling.",
+
+    "composers": [
 
       {
         "name": "Franz Liszt",
+        "portrait": "Franz Liszt",
         "birth": "1811",
         "style": "Piano Virtuoso",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Franz_Liszt_1858.jpg/800px-Franz_Liszt_1858.jpg",
-
         "about": "Legendary pianist and composer who expanded the technical possibilities of piano performance.",
-
         "songs": [
-
           {
             "title": "Hungarian Rhapsody No.2",
             "youtube": "https://www.youtube.com/watch?v=LdH1hSWGFGU",
             "video_id": "LdH1hSWGFGU"
           }
-
         ]
       },
 
 
       {
         "name": "Robert Schumann",
+        "portrait": "Robert Schumann",
         "birth": "1810",
         "style": "Piano / Lieder",
-        "mood": "Romantic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Robert_Schumann.jpg/800px-Robert_Schumann.jpg",
-
         "about": "German Romantic composer known for emotional piano works and art songs.",
-
         "songs": [
-
           {
             "title": "Kinderszenen",
             "youtube": "https://www.youtube.com/watch?v=yib7tvIrL6k",
             "video_id": "yib7tvIrL6k"
           }
-
         ]
       },
 
 
       {
         "name": "Johannes Brahms",
+        "portrait": "Johannes Brahms",
         "birth": "1833",
         "style": "Symphony / Chamber",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Johannes_Brahms_1853.jpg/800px-Johannes_Brahms_1853.jpg",
-
         "about": "Combined Romantic emotion with Classical structure and craftsmanship.",
-
         "songs": [
-
           {
             "title": "Symphony No.4",
             "youtube": "https://www.youtube.com/watch?v=ckuUq2im8a4",
             "video_id": "ckuUq2im8a4"
           },
-
           {
             "title": "Hungarian Dance No.5",
             "youtube": "https://www.youtube.com/watch?v=3X9LvC9WkkQ",
             "video_id": "3X9LvC9WkkQ"
           }
-
         ]
       },
 
 
       {
         "name": "Richard Wagner",
+        "portrait": "Richard Wagner",
         "birth": "1813",
         "style": "Opera / Music Drama",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Richard_Wagner_1871.jpg/800px-Richard_Wagner_1871.jpg",
-
         "about": "Revolutionized opera through enormous orchestration and dramatic storytelling.",
-
         "songs": [
-
           {
             "title": "Ride of the Valkyries",
             "youtube": "https://www.youtube.com/watch?v=GGU1P6lBW6Q",
             "video_id": "GGU1P6lBW6Q"
           }
-
         ]
       },
 
 
       {
         "name": "Pyotr Tchaikovsky",
+        "portrait": "Pyotr Ilyich Tchaikovsky",
         "birth": "1840",
         "style": "Symphony / Ballet",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Pyotr_Ilyich_Tchaikovsky_1893.jpg/800px-Pyotr_Ilyich_Tchaikovsky_1893.jpg",
-
         "about": "Russian Romantic composer famous for powerful melodies and world-famous ballets.",
-
         "songs": [
-
           {
             "title": "Swan Lake",
             "youtube": "https://www.youtube.com/watch?v=9cNQFB0TDfY",
             "video_id": "9cNQFB0TDfY"
           },
-
           {
             "title": "1812 Overture",
             "youtube": "https://www.youtube.com/watch?v=VbxgYlcNxE8",
             "video_id": "VbxgYlcNxE8"
           }
+        ]
+      },
 
+
+      {
+        "name": "Antonín Dvořák",
+        "portrait": "Antonín Dvořák",
+        "birth": "1841",
+        "style": "Symphony / Folk Influence",
+        "about": "Czech composer who blended Romantic orchestration with national folk traditions.",
+        "songs": [
+          {
+            "title": "New World Symphony",
+            "youtube": "https://www.youtube.com/watch?v=jOofzffyDSA",
+            "video_id": "jOofzffyDSA"
+          }
         ]
       }
 
     ]
 
   },
-    "Impressionist and 20th Century": {
 
-    "years": "1890-2000",
 
-    "description": "A period of experimentation, new harmonies, unusual rhythms, and revolutionary approaches to orchestral color.",
+  "Impressionist": {
 
+    "years": "1890-1920",
+
+    "description": "Impressionist composers explored atmosphere, color, and new approaches to harmony.",
 
     "composers": [
 
       {
         "name": "Claude Debussy",
+        "portrait": "Claude Debussy",
         "birth": "1862",
         "style": "Impressionism / Piano / Orchestra",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Claude_Debussy_ca_1908.jpg/800px-Claude_Debussy_ca_1908.jpg",
-
         "about": "French composer who transformed harmony and created atmospheric musical landscapes.",
-
         "songs": [
-
           {
             "title": "Clair de Lune",
             "youtube": "https://www.youtube.com/watch?v=CvFH_6DNRCY",
             "video_id": "CvFH_6DNRCY"
           },
-
           {
             "title": "La Mer",
             "youtube": "https://www.youtube.com/watch?v=FOCucJw7iT8",
             "video_id": "FOCucJw7iT8"
           }
-
         ]
       },
 
 
       {
         "name": "Maurice Ravel",
+        "portrait": "Maurice Ravel",
         "birth": "1875",
         "style": "Impressionism / Orchestration",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Maurice_Ravel_1925.jpg/800px-Maurice_Ravel_1925.jpg",
-
         "about": "French composer famous for extraordinary orchestral colors and elegant craftsmanship.",
-
         "songs": [
-
           {
             "title": "Boléro",
             "youtube": "https://www.youtube.com/watch?v=r30D3SW4OVw",
             "video_id": "r30D3SW4OVw"
-          },
-
-          {
-            "title": "Pavane for a Dead Princess",
-            "youtube": "https://www.youtube.com/watch?v=GKkeDqJBlK8",
-            "video_id": "GKkeDqJBlK8"
           }
-
-        ]
-      },
-
-
-      {
-        "name": "Sergei Rachmaninoff",
-        "birth": "1873",
-        "style": "Piano Concerto / Late Romantic",
-        "mood": "Romantic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Sergei_Rachmaninoff_1933.jpg/800px-Sergei_Rachmaninoff_1933.jpg",
-
-        "about": "Russian composer famous for sweeping melodies and virtuosic piano writing.",
-
-        "songs": [
-
-          {
-            "title": "Piano Concerto No.2",
-            "youtube": "https://www.youtube.com/watch?v=rEGOihjqO9w",
-            "video_id": "rEGOihjqO9w"
-          },
-
-          {
-            "title": "Prelude in C Sharp Minor",
-            "youtube": "https://www.youtube.com/watch?v=sCtixpIWBto",
-            "video_id": "sCtixpIWBto"
-          }
-
-        ]
-      },
-
-
-      {
-        "name": "Igor Stravinsky",
-        "birth": "1882",
-        "style": "Modernism / Ballet / Rhythm",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Igor_Stravinsky_LOC_32392.jpg/800px-Igor_Stravinsky_LOC_32392.jpg",
-
-        "about": "One of the most influential composers of the twentieth century, known for revolutionary rhythm.",
-
-        "songs": [
-
-          {
-            "title": "The Rite of Spring",
-            "youtube": "https://www.youtube.com/watch?v=EkwqPJZe8ms",
-            "video_id": "EkwqPJZe8ms"
-          },
-
-          {
-            "title": "The Firebird Suite",
-            "youtube": "https://www.youtube.com/watch?v=RZkIAVGlfWk",
-            "video_id": "RZkIAVGlfWk"
-          }
-
-        ]
-      },
-
-
-      {
-        "name": "Sergei Prokofiev",
-        "birth": "1891",
-        "style": "Modern Symphony / Ballet",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Sergei_Prokofiev_1918.jpg/800px-Sergei_Prokofiev_1918.jpg",
-
-        "about": "Russian composer known for bold harmonies, energetic rhythms, and expressive melodies.",
-
-        "songs": [
-
-          {
-            "title": "Peter and the Wolf",
-            "youtube": "https://www.youtube.com/watch?v=MfM7Y9Pcdzw",
-            "video_id": "MfM7Y9Pcdzw"
-          },
-
-          {
-            "title": "Romeo and Juliet",
-            "youtube": "https://www.youtube.com/watch?v=wS7CZIJVxFY",
-            "video_id": "wS7CZIJVxFY"
-          }
-
-        ]
-      },
-
-
-      {
-        "name": "Dmitri Shostakovich",
-        "birth": "1906",
-        "style": "Symphony / Chamber",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Dmitri_Shostakovich_1950.jpg/800px-Dmitri_Shostakovich_1950.jpg",
-
-        "about": "Soviet composer whose music combined personal expression with powerful symphonic structures.",
-
-        "songs": [
-
-          {
-            "title": "Symphony No.5",
-            "youtube": "https://www.youtube.com/watch?v=L__jruvYuCg",
-            "video_id": "L__jruvYuCg"
-          },
-
-          {
-            "title": "String Quartet No.8",
-            "youtube": "https://www.youtube.com/watch?v=Hn3B6fLJ2wE",
-            "video_id": "Hn3B6fLJ2wE"
-          }
-
-        ]
-      },
-
-
-      {
-        "name": "Béla Bartók",
-        "birth": "1881",
-        "style": "Modernism / Folk Music",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Bela_Bartok_1927.jpg/800px-Bela_Bartok_1927.jpg",
-
-        "about": "Hungarian composer who blended folk traditions with modern musical language.",
-
-        "songs": [
-
-          {
-            "title": "Concerto for Orchestra",
-            "youtube": "https://www.youtube.com/watch?v=i9qj8G9d8W4",
-            "video_id": "i9qj8G9d8W4"
-          }
-
-        ]
-      },
-
-
-      {
-        "name": "Gustav Holst",
-        "birth": "1874",
-        "style": "Orchestral Suite",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Gustav_Holst_1921.jpg/800px-Gustav_Holst_1921.jpg",
-
-        "about": "English composer best known for his orchestral suite The Planets.",
-
-        "songs": [
-
-          {
-            "title": "The Planets - Mars",
-            "youtube": "https://www.youtube.com/watch?v=L0bcRCCg01I",
-            "video_id": "L0bcRCCg01I"
-          }
-
         ]
       }
 
     ]
 
   },
-    "Modern": {
+  "20th Century": {
+
+    "years": "1900-1950",
+
+    "description": "The 20th century brought dramatic experimentation, new harmonies, modern orchestration, and new musical languages.",
+
+    "composers": [
+
+      {
+        "name": "Sergei Rachmaninoff",
+        "portrait": "Sergei Rachmaninoff",
+        "birth": "1873",
+        "style": "Late Romantic Piano / Symphony",
+        "about": "Russian composer and pianist famous for emotional melodies and virtuosic piano writing.",
+        "songs": [
+          {
+            "title": "Piano Concerto No.2",
+            "youtube": "https://www.youtube.com/watch?v=rEGOihjqO9w",
+            "video_id": "rEGOihjqO9w"
+          },
+          {
+            "title": "Prelude in C-sharp Minor",
+            "youtube": "https://www.youtube.com/watch?v=sCtixpIWBto",
+            "video_id": "sCtixpIWBto"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Igor Stravinsky",
+        "portrait": "Igor Stravinsky",
+        "birth": "1882",
+        "style": "Modernism / Ballet",
+        "about": "One of the most influential composers of the 20th century, famous for rhythmic innovation.",
+        "songs": [
+          {
+            "title": "The Rite of Spring",
+            "youtube": "https://www.youtube.com/watch?v=EkwqPJZe8ms",
+            "video_id": "EkwqPJZe8ms"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Sergei Prokofiev",
+        "portrait": "Sergei Prokofiev",
+        "birth": "1891",
+        "style": "Modern Classical / Ballet",
+        "about": "Russian composer known for energetic rhythms, sharp harmonies, and memorable melodies.",
+        "songs": [
+          {
+            "title": "Peter and the Wolf",
+            "youtube": "https://www.youtube.com/watch?v=MfM7Y9Pcdzw",
+            "video_id": "MfM7Y9Pcdzw"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Dmitri Shostakovich",
+        "portrait": "Dmitri Shostakovich",
+        "birth": "1906",
+        "style": "Symphony / Chamber",
+        "about": "Russian composer whose music reflected both personal expression and historical events.",
+        "songs": [
+          {
+            "title": "Symphony No.5",
+            "youtube": "https://www.youtube.com/watch?v=L__jruvYuCg",
+            "video_id": "L__jruvYuCg"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Béla Bartók",
+        "portrait": "Béla Bartók",
+        "birth": "1881",
+        "style": "Modernism / Folk Music",
+        "about": "Hungarian composer who combined modern techniques with folk music research.",
+        "songs": [
+          {
+            "title": "Romanian Folk Dances",
+            "youtube": "https://www.youtube.com/watch?v=QZ0QXh1YfKQ",
+            "video_id": "QZ0QXh1YfKQ"
+          }
+        ]
+      },
+
+
+      {
+        "name": "Gustav Holst",
+        "portrait": "Gustav Holst",
+        "birth": "1874",
+        "style": "Orchestral Suite",
+        "about": "English composer best known for the orchestral suite The Planets.",
+        "songs": [
+          {
+            "title": "The Planets - Mars",
+            "youtube": "https://www.youtube.com/watch?v=L0bcRCCg01I",
+            "video_id": "L0bcRCCg01I"
+          },
+          {
+            "title": "The Planets - Jupiter",
+            "youtube": "https://www.youtube.com/watch?v=Nz0b4STz1lo",
+            "video_id": "Nz0b4STz1lo"
+          }
+        ]
+      }
+
+
+    ]
+
+  },
+
+
+  "Modern": {
 
     "years": "1950-present",
 
-    "description": "Modern composers blend classical traditions with minimalism, electronics, film scoring, and new approaches to musical storytelling.",
-
+    "description": "Modern composers combine classical traditions with minimalism, electronics, film music, and new forms of expression.",
 
     "composers": [
 
       {
         "name": "Arvo Pärt",
+        "portrait": "Arvo Pärt",
         "birth": "1935",
         "style": "Minimalism / Sacred Music",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Arvo_Part_2011.jpg/800px-Arvo_Part_2011.jpg",
-
-        "about": "Estonian composer known for spiritual minimalism and his unique tintinnabuli style.",
-
+        "about": "Estonian composer known for spiritual, meditative works and his tintinnabuli style.",
         "songs": [
-
           {
             "title": "Spiegel im Spiegel",
             "youtube": "https://www.youtube.com/watch?v=TJ6Mzvh3XCc",
             "video_id": "TJ6Mzvh3XCc"
-          },
-
-          {
-            "title": "Fratres",
-            "youtube": "https://www.youtube.com/watch?v=7vdgZAJVnes",
-            "video_id": "7vdgZAJVnes"
           }
-
         ]
       },
 
 
       {
         "name": "Philip Glass",
+        "portrait": "Philip Glass",
         "birth": "1937",
-        "style": "Minimalism / Opera",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Philip_Glass_2011.jpg/800px-Philip_Glass_2011.jpg",
-
-        "about": "American composer and pioneer of minimalist music known for repetitive structures and hypnotic patterns.",
-
+        "style": "Minimalism",
+        "about": "American composer and pioneer of minimalist music.",
         "songs": [
-
           {
             "title": "Glassworks",
-            "youtube": "https://www.youtube.com/watch?v=M73x3jz2J4s",
-            "video_id": "M73x3jz2J4s"
+            "youtube": "https://www.youtube.com/watch?v=6Stu7h7Qup8",
+            "video_id": "6Stu7h7Qup8"
           }
-
-        ]
-      },
-
-
-      {
-        "name": "Steve Reich",
-        "birth": "1936",
-        "style": "Minimalism / Rhythm",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Steve_Reich_2006.jpg/800px-Steve_Reich_2006.jpg",
-
-        "about": "American composer who developed influential rhythmic techniques and minimalist composition.",
-
-        "songs": [
-
-          {
-            "title": "Music for 18 Musicians",
-            "youtube": "https://www.youtube.com/watch?v=ILpCKQlDmhc",
-            "video_id": "ILpCKQlDmhc"
-          }
-
         ]
       },
 
 
       {
         "name": "John Williams",
+        "portrait": "John Williams composer",
         "birth": "1932",
         "style": "Film Score / Orchestra",
-        "mood": "Powerful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/John_Williams_2023.jpg/800px-John_Williams_2023.jpg",
-
-        "about": "One of the most famous living composers, known for iconic orchestral film scores.",
-
+        "about": "One of the most famous modern orchestral composers, known for iconic film scores.",
         "songs": [
-
           {
             "title": "Star Wars Main Theme",
             "youtube": "https://www.youtube.com/watch?v=_D0ZQPqeJkk",
             "video_id": "_D0ZQPqeJkk"
           },
-
           {
             "title": "Jurassic Park Theme",
             "youtube": "https://www.youtube.com/watch?v=lW5uG6j7G5s",
             "video_id": "lW5uG6j7G5s"
           }
-
         ]
-      },
+      }
 
+    ]
 
+  },
       {
         "name": "Hans Zimmer",
+        "portrait": "Hans Zimmer",
         "birth": "1957",
         "style": "Film Score / Electronic Orchestra",
-        "mood": "Dramatic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Hans_Zimmer_2018.jpg/800px-Hans_Zimmer_2018.jpg",
-
-        "about": "German composer known for blending orchestral writing with electronic sound design.",
-
+        "about": "German composer known for blending traditional orchestration with electronic sound design.",
         "songs": [
-
           {
             "title": "Interstellar Main Theme",
             "youtube": "https://www.youtube.com/watch?v=UDVtMYqUAyw",
             "video_id": "UDVtMYqUAyw"
           },
-
           {
             "title": "Time - Inception",
             "youtube": "https://www.youtube.com/watch?v=c56t7upa8Bk",
             "video_id": "c56t7upa8Bk"
           }
-
         ]
       },
 
 
       {
         "name": "Joe Hisaishi",
+        "portrait": "Joe Hisaishi",
         "birth": "1950",
         "style": "Film Orchestra / Piano",
-        "mood": "Peaceful",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Joe_Hisaishi_2011.jpg/800px-Joe_Hisaishi_2011.jpg",
-
-        "about": "Japanese composer famous for emotionally rich orchestral scores and Studio Ghibli collaborations.",
-
+        "about": "Japanese composer famous for emotional orchestral scores and collaborations with Studio Ghibli.",
         "songs": [
-
           {
             "title": "Merry-Go-Round of Life",
             "youtube": "https://www.youtube.com/watch?v=HMGetv40FkI",
             "video_id": "HMGetv40FkI"
           }
-
         ]
       },
 
 
       {
         "name": "Max Richter",
+        "portrait": "Max Richter composer",
         "birth": "1966",
         "style": "Neo-Classical / Electronic",
-        "mood": "Romantic",
-
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Max_Richter_2015.jpg/800px-Max_Richter_2015.jpg",
-
-        "about": "Composer known for combining classical instruments with electronic textures and ambient sound.",
-
+        "about": "Composer who blends classical instruments with electronics and ambient sound.",
         "songs": [
-
           {
             "title": "On the Nature of Daylight",
             "youtube": "https://www.youtube.com/watch?v=rVN1B-tUpgs",
             "video_id": "rVN1B-tUpgs"
           }
-
         ]
       }
-
 
     ]
 
