@@ -1,30 +1,125 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import json
 import os
-import random
+import streamlit.components.v1 as components
 
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
+# =====================================================
+# PAGE CONFIGURATION
+# =====================================================
 
 st.set_page_config(
     page_title="Classical Music Explorer",
     page_icon="🎼",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 
-# =========================================================
-# LOAD DATA
-# =========================================================
+# =====================================================
+# CUSTOM STYLE
+# =====================================================
+
+st.markdown(
+    """
+    <style>
+
+    .main {
+        background-color: #0e1117;
+    }
+
+
+    h1 {
+        color: #f4d03f;
+        font-family: Georgia, serif;
+    }
+
+
+    h2, h3 {
+        color: #f7dc6f;
+        font-family: Georgia, serif;
+    }
+
+
+    .composer-card {
+
+        background:
+        linear-gradient(
+            145deg,
+            #1b1f27,
+            #11151c
+        );
+
+        border-radius:15px;
+
+        padding:20px;
+
+        margin-bottom:20px;
+
+        box-shadow:
+        0px 0px 15px rgba(0,0,0,.5);
+
+    }
+
+
+    .small-text {
+
+        color:#cccccc;
+
+        font-size:16px;
+
+        line-height:1.5;
+
+    }
+
+
+    .tag {
+
+        background:#4a235a;
+
+        padding:6px 12px;
+
+        border-radius:20px;
+
+        color:white;
+
+        display:inline-block;
+
+        margin-right:5px;
+
+        font-size:13px;
+
+    }
+
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
+# =====================================================
+# LOAD DATABASE
+# =====================================================
 
 @st.cache_data
-def load_database():
+def load_music_database():
+
+    file_path = "composers.json"
+
+    if not os.path.exists(file_path):
+
+        st.error(
+            "Cannot find composers.json. "
+            "Place it in the same folder as this script."
+        )
+
+        st.stop()
+
 
     with open(
-        "composers.json",
+        file_path,
         "r",
         encoding="utf-8"
     ) as file:
@@ -32,651 +127,748 @@ def load_database():
         return json.load(file)
 
 
-music = load_database()
+
+music = load_music_database()
 
 
 
-# =========================================================
-# SESSION STATE
-# =========================================================
+# =====================================================
+# SESSION STORAGE
+# =====================================================
 
 if "favorites" not in st.session_state:
+
     st.session_state.favorites = []
 
 
 
-# =========================================================
-# CSS
-# =========================================================
+# =====================================================
+# HEADER
+# =====================================================
+
+st.title("🎼 Classical Music Explorer")
 
 st.markdown(
-"""
-<style>
+    """
+    Explore the greatest composers in Western music history.
 
-.stApp {
-
-background:
-linear-gradient(
-135deg,
-#090d14,
-#121826
-);
-
-color:white;
-
-}
-
-
-h1 {
-
-color:#f4d35e;
-
-font-size:48px;
-
-}
-
-
-h2 {
-
-color:#f4d35e;
-
-}
-
-
-.card {
-
-background:
-
-linear-gradient(
-145deg,
-#171d28,
-#10151d
-);
-
-
-padding:25px;
-
-border-radius:20px;
-
-border:1px solid #303846;
-
-margin-bottom:25px;
-
-}
-
-
-
-.composer {
-
-font-size:32px;
-
-font-weight:bold;
-
-color:#f4d35e;
-
-}
-
-
-.badge {
-
-display:inline-block;
-
-background:#273142;
-
-padding:7px 14px;
-
-border-radius:20px;
-
-font-size:13px;
-
-}
-
-
-.small {
-
-color:#bbbbbb;
-
-}
-
-
-</style>
-""",
-unsafe_allow_html=True
+    Select an era from the sidebar to discover composers,
+    learn about their style, view portraits, and listen
+    to famous works directly inside the app.
+    """
 )
 
 
 
-# =========================================================
-# TIMELINE
-# =========================================================
+# =====================================================
+# SIDEBAR MENU
+# =====================================================
 
-timeline = {
-
-    "Medieval":500,
-    "Renaissance":1400,
-    "Baroque":1600,
-    "Classical":1750,
-    "Romantic":1820,
-    "Modern":1900
-
-}
+st.sidebar.title("🎻 Music Eras")
 
 
-
-# =========================================================
-# SIDEBAR
-# =========================================================
-
-st.sidebar.title("🎼 Music Explorer")
+eras = list(music.keys())
 
 
-page = st.sidebar.radio(
+selected_era = st.sidebar.selectbox(
+    "Choose a time period",
+    eras
+)
 
-    "Navigation",
 
-    [
-        "Explore",
-        "Masterpieces",
-        "Statistics"
+era_info = music[selected_era]
+
+
+st.sidebar.markdown("---")
+
+
+st.sidebar.info(
+    f"""
+    **{selected_era}**
+
+    {era_info['years']}
+
+    {era_info['description']}
+    """
+)
+
+
+st.sidebar.markdown("---")
+
+
+search_term = st.sidebar.text_input(
+    "🔎 Search composer"
+)
+
+
+st.sidebar.markdown("---")
+
+
+st.sidebar.write(
+    f"⭐ Favorites: {len(st.session_state.favorites)}"
+)
+# =====================================================
+# COMPOSER FILTERING
+# =====================================================
+
+
+composers = era_info["composers"]
+
+
+
+# Search filter
+
+if search_term:
+
+    composers = [
+
+        c for c in composers
+
+        if search_term.lower()
+        in c["name"].lower()
+
     ]
 
-)
+
+
+# =====================================================
+# ERA SUMMARY DASHBOARD
+# =====================================================
+
+
+col1, col2, col3 = st.columns(3)
+
+
+with col1:
+
+    st.metric(
+        "Time Period",
+        selected_era
+    )
+
+
+with col2:
+
+    st.metric(
+        "Years",
+        era_info["years"]
+    )
+
+
+with col3:
+
+    st.metric(
+        "Composers",
+        len(composers)
+    )
 
 
 
-st.sidebar.divider()
+st.divider()
 
 
 
-era = st.sidebar.selectbox(
-
-    "Musical Period",
-
-    list(music.keys())
-
-)
+# =====================================================
+# COMPOSER DISPLAY
+# =====================================================
 
 
-
-search = st.sidebar.text_input(
-
-    "🔎 Search Composer"
-
-)
+for composer in composers:
 
 
+    with st.container():
 
-# collect styles
 
-styles=[]
-
-for period in music.values():
-
-    for composer in period["composers"]:
-
-        styles.append(
-            composer["style"]
+        st.markdown(
+            '<div class="composer-card">',
+            unsafe_allow_html=True
         )
 
 
-styles = sorted(set(styles))
 
-
-
-style_filter = st.sidebar.multiselect(
-
-    "🎻 Style",
-
-    styles
-
-)
-
-
-
-mood_filter = st.sidebar.multiselect(
-
-    "🎭 Mood",
-
-    [
-        "Peaceful",
-        "Powerful",
-        "Dramatic",
-        "Romantic"
-    ]
-
-)
-
-
-
-if st.sidebar.button(
-    "🎲 Random Composer"
-):
-
-    all_composers=[]
-
-    for period in music.values():
-
-        all_composers.extend(
-            period["composers"]
+        left, right = st.columns(
+            [1, 3]
         )
 
 
-    random_pick=random.choice(
-        all_composers
-    )
 
+        # ---------------------------------------------
+        # IMAGE
+        # ---------------------------------------------
 
-    st.sidebar.success(
+        with left:
 
-        random_pick["name"]
+            try:
 
-    )
+                st.image(
+                    composer["image"],
+                    width=220
+                )
 
-
-
-st.sidebar.divider()
-
-
-st.sidebar.subheader(
-    "⭐ Favorites"
-)
-
-
-
-if st.session_state.favorites:
-
-    for fav in st.session_state.favorites:
-
-        st.sidebar.write(
-            "🎵",
-            fav
-        )
-
-else:
-
-    st.sidebar.write(
-        "No favorites yet"
-    )
-
-
-
-# =========================================================
-# MASTERPIECE PAGE
-# =========================================================
-
-if page == "Masterpieces":
-
-    st.title(
-        "🏆 Classical Masterpieces"
-    )
-
-
-    for period in music.values():
-
-        for composer in period["composers"]:
-
-            for song in composer["songs"]:
+            except Exception:
 
                 st.write(
-
-                    f"🎵 **{song['title']}** — {composer['name']}"
-
-                )
-
-                st.link_button(
-
-                    "Listen on YouTube",
-
-                    song["youtube"]
-
+                    "🖼️ Image unavailable"
                 )
 
 
-    st.stop()
+
+        # ---------------------------------------------
+        # DETAILS
+        # ---------------------------------------------
+
+        with right:
 
 
-
-# =========================================================
-# STATISTICS PAGE
-# =========================================================
-
-if page == "Statistics":
-
-
-    total_composers=0
-
-    total_songs=0
-
-
-    for period in music.values():
-
-        total_composers += len(
-            period["composers"]
-        )
-
-
-        for composer in period["composers"]:
-
-            total_songs += len(
-                composer["songs"]
+            st.subheader(
+                composer["name"]
             )
 
 
-    st.title(
-        "📊 Classical Music Statistics"
-    )
+            st.markdown(
+                f"""
+                <div class="small-text">
+
+                <b>Born:</b> {composer["birth"]}
+
+                <br>
+
+                <b>Style:</b> 
+                <span class="tag">
+                {composer["style"]}
+                </span>
 
 
-    a,b,c = st.columns(3)
+                <br><br>
+
+                {composer["about"]}
+
+                </div>
+                """,
+
+                unsafe_allow_html=True
+
+            )
 
 
-    a.metric(
-        "Composers",
+
+            st.write("")
+
+
+
+            # -----------------------------------------
+            # FAVORITES
+            # -----------------------------------------
+
+
+            fav_key = (
+                composer["name"]
+                +
+                "_favorite"
+            )
+
+
+            if composer["name"] in st.session_state.favorites:
+
+
+                if st.button(
+                    "⭐ Remove Favorite",
+                    key=fav_key
+                ):
+
+                    st.session_state.favorites.remove(
+                        composer["name"]
+                    )
+
+                    st.rerun()
+
+
+
+            else:
+
+
+                if st.button(
+                    "☆ Add Favorite",
+                    key=fav_key
+                ):
+
+                    st.session_state.favorites.append(
+                        composer["name"]
+                    )
+
+                    st.rerun()
+
+
+
+        st.markdown(
+            "</div>",
+            unsafe_allow_html=True
+        )
+
+
+
+        # =================================================
+        # MUSIC PLAYER SECTION
+        # =================================================
+
+
+        st.markdown(
+            "### 🎧 Listen"
+        )
+
+
+        song_titles = [
+
+            song["title"]
+
+            for song in composer["songs"]
+
+        ]
+
+
+
+        selected_song = st.selectbox(
+
+            "Choose a composition",
+
+            song_titles,
+
+            key=composer["name"]
+
+        )
+
+
+
+        selected_song_data = next(
+
+            song
+
+            for song in composer["songs"]
+
+            if song["title"] == selected_song
+
+        )
+
+
+
+        video_id = selected_song_data["video_id"]
+
+
+
+        # Embedded YouTube player
+
+
+        components.html(
+
+            f"""
+
+            <iframe
+
+            width="100%"
+
+            height="400"
+
+            src="https://www.youtube.com/embed/{video_id}"
+
+            title="YouTube player"
+
+            frameborder="0"
+
+            allow="accelerometer;
+
+            autoplay;
+
+            clipboard-write;
+
+            encrypted-media;
+
+            gyroscope;
+
+            picture-in-picture"
+
+            allowfullscreen>
+
+            </iframe>
+
+            """,
+
+            height=420
+
+        )
+
+
+
+        st.divider()
+        # =====================================================
+# LOWER DASHBOARD SECTION
+# =====================================================
+
+st.divider()
+
+st.header("🎼 Explorer Dashboard")
+
+
+
+# -----------------------------------------------------
+# Collect statistics
+# -----------------------------------------------------
+
+
+all_composers = []
+
+
+for era in music.values():
+
+    for composer in era["composers"]:
+
+        all_composers.append(composer)
+
+
+
+total_composers = len(all_composers)
+
+
+
+styles = {}
+
+
+for composer in all_composers:
+
+    style = composer["style"]
+
+    styles[style] = styles.get(style, 0) + 1
+
+
+
+# -----------------------------------------------------
+# Dashboard metrics
+# -----------------------------------------------------
+
+
+dash1, dash2, dash3 = st.columns(3)
+
+
+
+with dash1:
+
+    st.metric(
+        "Total Composers",
         total_composers
     )
 
 
-    b.metric(
-        "Music Samples",
-        total_songs
-    )
+with dash2:
 
-
-    c.metric(
+    st.metric(
         "Historical Periods",
         len(music)
     )
 
 
-    st.stop()
+with dash3:
+
+    st.metric(
+        "Favorite Composers",
+        len(st.session_state.favorites)
+    )
 
 
 
-# =========================================================
-# EXPLORE PAGE
-# =========================================================
+st.divider()
 
 
-period = music[era]
+
+# =====================================================
+# RANDOM COMPOSER FEATURE
+# =====================================================
 
 
-st.title(
-    "🎼 Classical Music Explorer"
+st.header("🎲 Discover a Composer")
+
+
+
+import random
+
+
+
+if st.button(
+    "Find Random Composer"
+):
+
+    random_composer = random.choice(
+        all_composers
+    )
+
+
+    st.session_state.random_composer = (
+        random_composer
+    )
+
+
+
+if "random_composer" in st.session_state:
+
+
+    rc = st.session_state.random_composer
+
+
+
+    col_a, col_b = st.columns(
+        [1,3]
+    )
+
+
+    with col_a:
+
+        st.image(
+            rc["image"],
+            width=180
+        )
+
+
+    with col_b:
+
+        st.subheader(
+            rc["name"]
+        )
+
+        st.write(
+            f"""
+            **Born:** {rc["birth"]}
+
+            **Style:** {rc["style"]}
+
+            {rc["about"]}
+            """
+        )
+
+
+
+st.divider()
+
+
+
+# =====================================================
+# FAVORITES SECTION
+# =====================================================
+
+
+st.header("⭐ My Favorite Composers")
+
+
+
+if len(st.session_state.favorites) == 0:
+
+
+    st.info(
+        "You have not selected any favorites yet."
+    )
+
+
+
+else:
+
+
+    favorite_data = [
+
+        c
+
+        for c in all_composers
+
+        if c["name"]
+        in st.session_state.favorites
+
+    ]
+
+
+
+    fav_columns = st.columns(3)
+
+
+
+    for index, composer in enumerate(favorite_data):
+
+
+        with fav_columns[index % 3]:
+
+
+            st.image(
+                composer["image"],
+                width=150
+            )
+
+
+            st.subheader(
+                composer["name"]
+            )
+
+
+            st.caption(
+                composer["style"]
+            )
+
+
+
+st.divider()
+
+
+
+# =====================================================
+# STYLE EXPLORER
+# =====================================================
+
+
+st.header("🎻 Musical Styles")
+
+
+selected_style = st.selectbox(
+
+    "Explore composers by style",
+
+    sorted(
+        styles.keys()
+    )
+
 )
 
 
 
+matching = [
+
+    c
+
+    for c in all_composers
+
+    if selected_style
+    in c["style"]
+
+]
+
+
+
+for composer in matching:
+
+
+    st.write(
+        f"🎼 **{composer['name']}** — {composer['style']}"
+    )
+    # =====================================================
+# HISTORICAL TIMELINE
+# =====================================================
+
+st.divider()
+
+st.header("📜 Classical Music Timeline")
+
+
+
+timeline_data = []
+
+
+for era_name, era in music.items():
+
+    timeline_data.append(
+
+        {
+            "Era": era_name,
+            "Years": era["years"],
+            "Description": era["description"]
+        }
+
+    )
+
+
+
+for item in timeline_data:
+
+
+    with st.expander(
+
+        f"🎼 {item['Era']}  |  {item['Years']}"
+
+    ):
+
+        st.write(
+            item["Description"]
+        )
+
+
+
+st.divider()
+
+
+
+# =====================================================
+# APP INFORMATION
+# =====================================================
+
+
+st.header("🎼 About Classical Music Explorer")
+
+
 st.markdown(
 
-f"""
+"""
+### Purpose
 
-<div class="card">
+Classical Music Explorer is an interactive digital museum
+for discovering the history of Western classical music.
 
-<h2>{era}</h2>
+### Features
+
+- 🎻 Browse major musical eras
+- 🖼️ View composer portraits
+- 🎧 Listen to famous works
+- ⭐ Save favorite composers
+- 🔎 Search composers
+- 🎲 Discover random composers
+- 📚 Explore musical styles
+
+### Covered Periods
+
+- Medieval
+- Renaissance
+- Baroque
+- Classical
+- Romantic
+- Impressionist
+- 20th Century
+- Modern
+
+---
+
+Built with:
+
+🐍 Python  
+🌐 Streamlit  
+🎼 Classical music history data
+
+"""
+
+)
 
 
-<p class="small">
 
-{period['years']}
-
-</p>
-
-
-<p>
-
-{period['description']}
-
-</p>
+# =====================================================
+# FOOTER
+# =====================================================
 
 
-</div>
+st.markdown(
+
+"""
+<br><br>
+
+<center>
+
+🎼 <b>Classical Music Explorer</b><br>
+
+Explore. Listen. Discover.
+
+</center>
 
 """,
 
 unsafe_allow_html=True
 
 )
-
-
-
-# Timeline
-
-
-st.subheader(
-    "📜 Musical Timeline"
-)
-
-
-year = st.slider(
-
-    "Travel through history",
-
-    500,
-
-    2026,
-
-    timeline.get(
-        era,
-        1750
-    )
-
-)
-
-
-closest=min(
-
-    timeline,
-
-    key=lambda x:
-
-    abs(timeline[x]-year)
-
-)
-
-
-st.info(
-
-f"{year} is closest to the {closest} era"
-
-)
-
-
-
-# =========================================================
-# COMPOSERS
-# =========================================================
-
-
-for composer in period["composers"]:
-
-
-    name = composer["name"]
-
-
-    if search:
-
-        if search.lower() not in name.lower():
-
-            continue
-
-
-
-    if style_filter:
-
-        if composer["style"] not in style_filter:
-
-            continue
-
-
-
-    if mood_filter:
-
-        if composer["mood"] not in mood_filter:
-
-            continue
-
-
-
-    st.markdown(
-
-    f"""
-
-    <div class="card">
-
-
-    <div class="composer">
-
-    {name}
-
-    </div>
-
-
-    <br>
-
-
-    <span class="badge">
-
-    {composer['style']}
-
-    </span>
-
-
-    <br><br>
-
-
-    <p class="small">
-
-    Born: {composer['birth']}
-
-    </p>
-
-
-    <p>
-
-    {composer['about']}
-
-    </p>
-
-
-    </div>
-
-    """,
-
-    unsafe_allow_html=True
-
-    )
-
-
-
-    # Image support
-
-    image_path = (
-
-        "images/" +
-
-        composer["image"]
-
-    )
-
-
-    if os.path.exists(image_path):
-
-        st.image(
-            image_path,
-            width=250
-        )
-
-
-
-    # Favorite
-
-    if st.button(
-
-        "⭐ Add Favorite",
-
-        key=name
-
-    ):
-
-
-        if name not in st.session_state.favorites:
-
-            st.session_state.favorites.append(name)
-
-
-
-    # Music
-
-
-    st.subheader(
-        "🎧 Listen"
-    )
-
-
-    songs={}
-
-
-    for song in composer["songs"]:
-
-        songs[
-            song["title"]
-        ] = song["youtube"]
-
-
-
-    selection=st.selectbox(
-
-        "Choose piece",
-
-        list(songs.keys()),
-
-        key="song_"+name
-
-    )
-
-
-    youtube=songs[selection]
-
-
-
-    st.link_button(
-
-        "▶ Open YouTube",
-
-        youtube
-
-    )
-
-
-    query=youtube.split(
-        "search_query="
-    )[-1]
-
-
-
-    components.html(
-
-    f"""
-
-    <iframe
-
-    width="100%"
-
-    height="400"
-
-    src="https://www.youtube.com/embed?listType=search&list={query}"
-
-    frameborder="0"
-
-    allowfullscreen>
-
-    </iframe>
-
-    """,
-
-    height=420
-
-    )
-
-
-    st.divider()
