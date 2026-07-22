@@ -62,6 +62,26 @@ def fetch_treasury_par_yield_curve(year: int | None = None) -> pd.DataFrame:
 
 
 @st.cache_data(ttl=3600)
+def fetch_treasury_curve_history(years_back: int = 1) -> pd.DataFrame:
+    """Fetch the current year's curve plus `years_back` prior years, concatenated.
+
+    Needed because Treasury.gov's CSV feed is scoped to a single calendar
+    year, so a true "1 year ago" comparison point requires stitching two
+    years together.
+    """
+    current_year = datetime.now().year
+    frames = []
+    for yr in range(current_year - years_back, current_year + 1):
+        try:
+            frames.append(fetch_treasury_par_yield_curve(yr))
+        except Exception:
+            continue
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True).sort_values("Date").reset_index(drop=True)
+
+
+@st.cache_data(ttl=3600)
 def fetch_sp500(period: str = "1y") -> pd.DataFrame:
     """Pull S&P 500 index history via yfinance (no API key needed)."""
     df = yf.Ticker("^GSPC").history(period=period)
@@ -76,3 +96,32 @@ def latest_value(df: pd.DataFrame, value_col: str = "value"):
     latest = df.iloc[-1][value_col]
     prior = df.iloc[-2][value_col] if len(df) > 1 else latest
     return latest, latest - prior
+
+
+def get_recession_periods(series: pd.Series) -> list[tuple]:
+    """Turn a 0/1 recession-indicator series (e.g. FRED's USREC) indexed by
+    date into a list of (start_date, end_date) tuples for each recession."""
+    s = series.dropna().sort_index()
+    periods = []
+    in_recession = False
+    start = prev_date = None
+    for date, val in s.items():
+        if val >= 1 and not in_recession:
+            in_recession = True
+            start = date
+        elif val < 1 and in_recession:
+            in_recession = False
+            periods.append((start, prev_date))
+        prev_date = date
+    if in_recession:
+        periods.append((start, prev_date))
+    return periods
+
+
+def value_n_months_ago(series: pd.Series, months: int = 6):
+    """Nearest observation at least `months` back from the series' latest date."""
+    if series.empty:
+        return series.iloc[-1] if len(series) else None
+    cutoff = series.index.max() - pd.DateOffset(months=months)
+    candidates = series[series.index <= cutoff]
+    return candidates.iloc[-1] if len(candidates) else series.iloc[0]

@@ -37,6 +37,16 @@ def inject_css():
             letter-spacing: 0.02em;
         }}
         .terminal-subtitle {{ font-size: 13px; color: {TEXT_SECONDARY}; margin-top: 4px; }}
+        .regime-line {{
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: {TEXT_SECONDARY}; margin: 6px 0 0 0;
+        }}
+        .regime-pos {{ color: {POSITIVE}; }}
+        .regime-neg {{ color: {NEGATIVE}; }}
+        .regime-neutral {{ color: {TEXT_SECONDARY}; }}
+        .chart-caption {{
+            font-size: 11px; color: {TEXT_SECONDARY}; margin: 4px 0 0 0;
+        }}
         .terminal-meta {{
             font-size: 12px; color: {TEXT_SECONDARY}; text-align: right;
             font-family: 'JetBrains Mono', monospace;
@@ -51,13 +61,12 @@ def inject_css():
         }}
 
         .kpi-card {{
-            background: {PANEL}; border: 1px solid {BORDER}; border-radius: 8px;
-            padding: 14px 16px 4px 16px; transition: all 0.2s ease;
+            background: {PANEL}; border: 1px solid {BORDER}; border-radius: 8px 8px 0 0;
+            padding: 14px 16px; transition: all 0.2s ease; border-bottom: none;
         }}
         .kpi-card:hover {{
             border-color: {ACCENT};
             box-shadow: 0 0 18px rgba(245, 166, 35, 0.12);
-            transform: translateY(-2px);
         }}
         .kpi-label {{
             font-size: 11px; color: {TEXT_SECONDARY}; text-transform: uppercase;
@@ -70,6 +79,19 @@ def inject_css():
         .kpi-delta-pos {{ color: {POSITIVE}; font-family: 'JetBrains Mono', monospace; font-size: 12px; }}
         .kpi-delta-neg {{ color: {NEGATIVE}; font-family: 'JetBrains Mono', monospace; font-size: 12px; }}
 
+        /* the "Expand chart" button sits flush under its kpi-card, styled as one unit */
+        div[data-testid="column"] .stButton {{ margin-top: -1px; }}
+        .stButton > button {{
+            background: {PANEL}; border: 1px solid {BORDER}; border-top: none;
+            border-radius: 0 0 8px 8px; color: {TEXT_SECONDARY};
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+            padding: 6px 0; width: 100%; box-shadow: none;
+        }}
+        .stButton > button:hover {{
+            color: {ACCENT}; border-color: {ACCENT}; background: {PANEL};
+        }}
+        .stButton > button:focus:not(:active) {{ color: {ACCENT}; border-color: {ACCENT}; }}
+
         .panel {{
             background: {PANEL}; border: 1px solid {BORDER}; border-radius: 8px;
             padding: 18px 20px; margin-bottom: 16px;
@@ -78,11 +100,24 @@ def inject_css():
             font-size: 12px; font-weight: 600; color: {TEXT_PRIMARY};
             text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 12px 0;
         }}
+        .panel-close-wrap .stButton > button {{
+            border-radius: 4px; border: 1px solid {BORDER}; font-size: 11px;
+        }}
+
+        .curve-alert {{
+            background: rgba(229, 72, 77, 0.08); border-left: 3px solid {NEGATIVE};
+            border-radius: 0; padding: 10px 14px; font-size: 12px;
+            color: {NEGATIVE}; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace;
+        }}
 
         .footer-note {{
             font-size: 11px; color: {TEXT_SECONDARY}; text-align: center;
             border-top: 1px solid {BORDER}; padding-top: 16px; margin-top: 8px;
         }}
+        .footer-note a {{
+            color: {TEXT_SECONDARY}; text-decoration: none; border-bottom: 1px solid {BORDER};
+        }}
+        .footer-note a:hover {{ color: {ACCENT}; border-bottom-color: {ACCENT}; }}
 
         /* tighten the gap Streamlit leaves above embedded plotly charts */
         div[data-testid="stPlotlyChart"] {{ margin-top: -8px; }}
@@ -115,22 +150,3 @@ def plotly_layout(fig: go.Figure, height: int = 320) -> go.Figure:
     )
     return fig
 
-
-def sparkline(values, color: str = ACCENT, height: int = 36) -> go.Figure:
-    """Tiny inline trend line used inside KPI cards."""
-    fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(
-            y=list(values), mode="lines",
-            line=dict(color=color, width=1.5),
-            fill="tozeroy", fillcolor="rgba(245,166,35,0.08)",
-            hoverinfo="skip",
-        )
-    )
-    fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        height=height, margin=dict(l=0, r=0, t=0, b=0),
-        xaxis=dict(visible=False), yaxis=dict(visible=False),
-        showlegend=False,
-    )
-    return fig
